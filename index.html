@@ -110,12 +110,16 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 .pulse{animation:breathe 1.8s ease-in-out infinite}
 
 /* 視窗 */
-.mask{position:fixed;inset:0;background:rgba(62,45,36,.35);display:none;align-items:center;justify-content:center;z-index:40;padding:24px}
+.mask{position:fixed;inset:0;background:rgba(62,45,36,.38);display:none;align-items:center;justify-content:center;z-index:40;padding:24px;
+  touch-action:none;overscroll-behavior:contain;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .mask.on{display:flex}
 .modal{position:relative;width:100%;max-width:350px;max-height:60vh;overflow:auto;background:var(--card);
   border:1px solid var(--line);border-radius:26px;padding:24px 22px 18px;box-shadow:0 30px 60px -30px rgba(62,45,36,.6)}
 .modal h2{margin:0 0 10px;font-size:22px;letter-spacing:2px}
-.modal .x{position:absolute;right:12px;top:12px;width:40px;height:40px;border:none;background:none;padding:6px}
+.modal{overscroll-behavior:contain;touch-action:pan-y}
+.modal .x{position:absolute;right:14px;top:14px;width:34px;height:34px;border:none;background:var(--bg2);border-radius:50%;padding:0;
+  display:flex;align-items:center;justify-content:center;z-index:2}
+.modal .x svg{width:14px;height:14px;display:block}
 .modal ul{padding-left:20px;font-size:16px;line-height:1.7;margin:6px 0;color:var(--ink2)}
 .ver{font-weight:700;margin-top:10px}
 .foot{font-size:12px;color:var(--ink2);margin-top:auto;padding-top:24px;text-align:center;letter-spacing:1px;opacity:.8}
@@ -125,26 +129,35 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 .toast.on{opacity:1}
 
 /* 被擋時的圖解教學 */
-.guide{max-height:80vh;padding:22px 18px 18px}
-.guide h2{font-size:24px;margin:0 0 4px}
-.guide .gsub{font-size:16px;color:var(--ink2);line-height:1.6;margin-bottom:6px}
-.tabs{display:flex;gap:6px;margin:10px 0 4px;background:var(--bg2);border-radius:14px;padding:4px}
-.tabs button{flex:1;border:none;background:none;font-size:15px;padding:9px 0;border-radius:11px;color:var(--ink2);font-family:inherit;font-weight:600}
-.tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px -4px rgba(62,45,36,.4)}
-.step{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
-.step .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--ac);color:#fff;font-weight:800;
-  display:flex;align-items:center;justify-content:center;font-size:17px}
-.step .t{font-size:19px;line-height:1.5;font-weight:600}
+.guide{max-height:82vh;padding:0;display:flex;flex-direction:column;overflow:hidden;max-width:360px}
+.ghead{padding:26px 22px 14px;text-align:center;flex:none;background:linear-gradient(180deg,var(--ac-xl),var(--card))}
+.gbadge{width:72px;height:72px;margin:0 auto 8px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px -12px rgba(62,45,36,.5);border:1px solid var(--line)}
+.gbadge svg{width:54px;height:54px}
+.guide h2{font-size:23px;margin:0;letter-spacing:2px}
+.guide .gsub{font-size:15px;color:var(--ink2);line-height:1.6;margin-top:4px;letter-spacing:.5px}
+.gbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:4px 20px 6px}
+.gfoot{flex:none;padding:10px 20px 18px;border-top:1px solid #F1EBE2;background:var(--card)}
+.gfoot .big-btn{margin-top:0;max-width:none;min-height:58px;font-size:19px}
+.tabs{display:flex;gap:4px;margin:12px auto 0;background:var(--bg2);border-radius:99px;padding:4px;max-width:240px}
+.tabs button{flex:1;border:none;background:none;font-size:14px;padding:8px 0;border-radius:99px;color:var(--ink2);font-family:inherit;font-weight:600;letter-spacing:1px}
+.tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px -4px rgba(62,45,36,.45)}
+.steps{position:relative;margin-top:6px}
+.step{position:relative;display:flex;gap:14px;align-items:flex-start;padding:12px 0 6px}
+.step:not(:last-child)::before{content:"";position:absolute;left:14px;top:44px;bottom:-8px;width:1.5px;background:var(--line)}
+.step .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--card);border:1.5px solid var(--ac);color:var(--ac-d);font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1}
+.step .t{font-size:18px;line-height:1.55;font-weight:600;padding-top:2px}
 .step .t b{color:var(--ac-d)}
-.mock{margin-top:8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.mrow{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:16px;border-top:1px solid #F0EAE1}
+.mock{margin-top:10px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 0 #EFE7DC,0 6px 16px -12px rgba(62,45,36,.45);border:1px solid #F0E9DF}
+.mrow{display:flex;align-items:center;gap:11px;padding:10px 12px;font-size:15.5px;border-top:1px solid #F3EEE7}
 .mrow:first-child{border-top:none}
-.mrow .ic{width:26px;height:26px;border-radius:7px;flex:none}
-.mrow .r{margin-left:auto;color:var(--ink2);font-size:14px}
-.mrow.hl{background:var(--ac-xl);font-weight:700}
-.sw{width:42px;height:26px;border-radius:99px;background:#65C466;position:relative;margin-left:auto}
-.sw::after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff}
-.gnote{font-size:14px;color:var(--ink2);margin-top:12px;line-height:1.6;background:var(--bg);border-radius:12px;padding:10px 12px}
+.mrow .ic{width:28px;height:28px;border-radius:7px;flex:none;display:block}
+.mrow .r{margin-left:auto;color:#9A8B7E;font-size:13.5px;white-space:nowrap}
+.mrow.hl{background:var(--ac-xl);font-weight:700;box-shadow:inset 3px 0 0 var(--ac)}
+.sw{width:44px;height:27px;border-radius:99px;background:#65C466;position:relative;margin-left:auto;flex:none}
+.sw::after{content:"";position:absolute;right:2px;top:2px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.gnote{font-size:13.5px;color:var(--ink2);margin:14px 0 4px;line-height:1.7;background:var(--bg);border-radius:12px;padding:10px 12px;letter-spacing:.3px}
 .status-pill.tap{border-color:var(--red);color:var(--red)}
 </style>
 </head>
@@ -265,7 +278,7 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 <!-- 更新說明 -->
 <div class="mask" id="newsMask">
   <div class="modal">
-    <button class="x" id="newsX" aria-label="關閉"><svg><use href="#icX"/></svg></button>
+    <button class="x" id="newsX" aria-label="關閉"><svg viewBox="0 0 14 14"><path d="M2 2 L12 12 M12 2 L2 12" stroke="#3E2D24" stroke-width="2" stroke-linecap="round"/></svg></button>
     <h2>更新說明</h2>
     <div id="newsBody"></div>
   </div>
@@ -273,14 +286,15 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 <!-- 被擋時的圖解教學 -->
 <div class="mask" id="guideMask">
   <div class="modal guide">
-    <button class="x" id="guideX" aria-label="關閉"><svg><use href="#icX"/></svg></button>
-    <h2 id="gTitle">位置被關掉了</h2>
-    <div class="gsub" id="gSub">照下面做一次，以後就不用再設定</div>
-    <div class="tabs" id="gTabs">
-      <button data-os="ios">iPhone</button><button data-os="android">Android</button>
+    <button class="x" id="guideX" aria-label="關閉"><svg viewBox="0 0 14 14"><path d="M2 2 L12 12 M12 2 L2 12" stroke="#3E2D24" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="ghead">
+      <div class="gbadge"><svg viewBox="0 0 200 200"><use href="#mascotSym"/></svg></div>
+      <h2 id="gTitle">位置被關掉了</h2>
+      <div class="gsub" id="gSub">照下面做一次，以後就不用再設定</div>
+      <div class="tabs" id="gTabs"><button data-os="ios">iPhone</button><button data-os="android">Android</button></div>
     </div>
-    <div id="gBody"></div>
-    <button class="big-btn small" id="gRetry" style="max-width:none">我改好了，再試一次</button>
+    <div class="gbody" id="gBody"></div>
+    <div class="gfoot" id="gFoot"><button class="big-btn" id="gRetry">我改好了，再試一次</button></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -590,6 +604,12 @@ function renderVoice(){
 }
 
 
+
+let _scrollY=0, _locks=0;
+function lockScroll(){ if(_locks++>0) return; _scrollY=window.scrollY;
+  Object.assign(document.body.style,{position:'fixed',top:(-_scrollY)+'px',left:'0',right:'0',overflow:'hidden'}); }
+function unlockScroll(){ if(_locks===0||--_locks>0) return;
+  Object.assign(document.body.style,{position:'',top:'',left:'',right:'',overflow:''}); window.scrollTo(0,_scrollY); }
 // ===== 被擋時的圖解教學 =====
 const UA = navigator.userAgent || '';
 const ENV = {
@@ -598,37 +618,50 @@ const ENV = {
       : /SamsungBrowser/.test(UA) ? 'samsung' : /Android/.test(UA) ? 'chrome' : 'safari'
 };
 let guideKind = null, guideOs = ENV.os, compassPending = false;
-const icon = c=>`<span class="ic" style="background:${c}"></span>`;
+const ICONS = {
+  gear:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#8E8E93"/><circle cx="14" cy="14" r="7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-dasharray="3 2.2"/><circle cx="14" cy="14" r="3.2" fill="#fff"/></svg>',
+  hand:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#3478F6"/><path d="M14 6 l7 3 v5 c0 4 -3 7 -7 8 c-4 -1 -7 -4 -7 -8 v-5z" fill="#fff"/></svg>',
+  loc:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#3478F6"/><path d="M20 8 L8 13.5 L13.5 14.5 L14.5 20z" fill="#fff"/></svg>',
+  safari:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#fff" stroke="#E5E5EA"/><circle cx="14" cy="14" r="9" fill="#2F8CF6"/><path d="M18 10 L15 15 L10 18 L13 13z" fill="#fff"/><path d="M18 10 L15 15 L13 13z" fill="#FF3B30"/></svg>',
+  chrome:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#fff" stroke="#E5E5EA"/><circle cx="14" cy="14" r="9" fill="#34A853"/><path d="M14 5 a9 9 0 0 1 7.8 4.5 H14z" fill="#EA4335"/><path d="M6.2 9.5 A9 9 0 0 1 14 5 L14 9.5z" fill="#EA4335"/><path d="M21.8 9.5 A9 9 0 0 1 18 21.8 L14 14z" fill="#FBBC05"/><circle cx="14" cy="14" r="4" fill="#4285F4" stroke="#fff" stroke-width="1.6"/></svg>',
+  tune:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#5F6368"/><path d="M8 10 h12 M8 18 h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="10" r="2.5" fill="#5F6368" stroke="#fff" stroke-width="2"/><circle cx="17" cy="18" r="2.5" fill="#5F6368" stroke="#fff" stroke-width="2"/></svg>',
+  pin:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#1A73E8"/><path d="M14 22 c-4 -5 -6 -7 -6 -10 a6 6 0 0 1 12 0 c0 3 -2 5 -6 10z" fill="#fff"/><circle cx="14" cy="12" r="2.2" fill="#1A73E8"/></svg>',
+  line:'<svg class="ic" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#06C755"/><ellipse cx="14" cy="13" rx="8" ry="6.5" fill="#fff"/><path d="M11 18 l-1 4 4 -3z" fill="#fff"/></svg>'
+};
 function stepsHtml(kind, os){
-  const st=(n,t,mock='')=>`<div class="step"><div class="n">${n}</div><div style="flex:1"><div class="t">${t}</div>${mock}</div></div>`;
+  const st=(n,t,mock='')=>`<div class="step"><div class="n">${n}</div><div style="flex:1;min-width:0"><div class="t">${t}</div>${mock}</div></div>`;
+  const mock=rows=>`<div class="mock">${rows.join('')}</div>`;
+  const row=(ic,txt,right='',hl=false)=>`<div class="mrow${hl?' hl':''}">${ICONS[ic]}<span>${txt}</span>${right}</div>`;
+  const R=t=>`<span class="r">${t}</span>`, SW='<span class="sw"></span>';
+  let h='';
   if(kind==='line'){
-    return st(1,'點右下角的 <b>⋯</b>（或右上角）')
-         + st(2, os==='ios' ? '選 <b>「以 Safari 開啟」</b>' : '選 <b>「以其他應用程式開啟」</b> → Chrome')
-         + st(3,'在新打開的網頁按 <b>「開始找」</b>');
-  }
-  if(kind==='compass'){
-    return os==='ios'
-      ? st(1,'把這個網頁<b>關掉</b>') + st(2,'回到 LINE <b>再點一次連結</b>') + st(3,'問「動作與方向」時按 <b>「允許」</b>')
+    h = st(1,'點畫面角落的 <b>⋯</b>')
+      + st(2, os==='ios' ? '選 <b>「以 Safari 開啟」</b>' : '選 <b>「以其他應用程式開啟」</b>',
+           mock([row(os==='ios'?'safari':'chrome', os==='ios'?'以 Safari 開啟':'以其他應用程式開啟','',true)]))
+      + st(3,'在新打開的網頁按 <b>「開始找」</b>');
+  }else if(kind==='compass'){
+    h = os==='ios'
+      ? st(1,'把這個網頁<b>關掉</b>') + st(2,'回到 LINE <b>再點一次連結</b>', mock([row('line','LINE 聊天室裡的連結')]))
+        + st(3,'問「動作與方向」時按 <b>「允許」</b>')
         + '<div class="gnote">沒開羅盤也能用：距離照樣會顯示，只是箭頭不會跟著你轉。</div>'
-      : st(1,'Android 不用另外允許羅盤') + st(2,'把手機<b>拿平</b>，在空中畫 8 字校正')
-        + '<div class="gnote">箭頭亂轉通常是羅盤沒校正，畫幾次 8 字就會好。</div>';
+      : st(1,'Android 不用另外允許羅盤') + st(2,'把手機<b>拿平</b>，在空中畫幾次 <b>8 字</b>')
+        + '<div class="gnote">箭頭亂轉通常是羅盤還沒校正，畫幾次 8 字就會好。</div>';
+  }else if(os==='ios'){
+    const isChrome = ENV.br==='chrome';
+    const app = isChrome ? 'Chrome' : ENV.br==='firefox' ? 'Firefox' : 'Safari 網站';
+    h = st(1,'打開手機的 <b>「設定」</b>', mock([row('gear','設定')]))
+      + st(2,'點 <b>「隱私權與安全性」</b>', mock([row('hand','隱私權與安全性',R('›'),true)]))
+      + st(3,'點 <b>「定位服務」</b>，最上面的開關要<b>打開</b>', mock([row('loc','定位服務',SW,true)]))
+      + st(4,`往下找 <b>「${app}」</b>，選 <b>「使用 App 期間」</b>`, mock([row(isChrome?'chrome':'safari',app,R('使用 App 期間 ›'),true)]))
+      + st(5,'回到這裡，按下面的 <b>「再試一次」</b>')
+      + `<div class="gnote">還是不行的話：點網址列左邊的「<b>大小</b>」圖示 →「網站設定」→「位置」→ 選「<b>允許</b>」。</div>`;
+  }else{
+    h = st(1,'從螢幕最上面<b>往下滑</b>，打開 <b>「定位」</b>', mock([row('pin','定位',SW,true)]))
+      + st(2,'點網址列左邊的 <b>小圖示</b> → <b>「權限」</b>', mock([row('tune','權限',R('›'))]))
+      + st(3,'把 <b>「位置」</b> 改成 <b>「允許」</b>', mock([row('pin','位置',R('允許'),true)]))
+      + st(4,'按下面的 <b>「再試一次」</b>');
   }
-  // 定位
-  if(os==='ios'){
-    const app = ENV.br==='chrome' ? 'Chrome' : ENV.br==='firefox' ? 'Firefox' : 'Safari 網站';
-    return st(1,'打開手機的 <b>「設定」</b>', `<div class="mock"><div class="mrow">${icon('#8E8E93')}設定</div></div>`)
-      + st(2,'點 <b>「隱私權與安全性」</b> → <b>「定位服務」</b>，最上面的開關要<b>打開</b>',
-          `<div class="mock"><div class="mrow">${icon('#3478F6')}隱私權與安全性<span class="r">›</span></div><div class="mrow hl">${icon('#3478F6')}定位服務<span class="sw"></span></div></div>`)
-      + st(3,`往下找 <b>「${app}」</b>，改成 <b>「使用 App 期間」</b>`,
-          `<div class="mock"><div class="mrow hl">${icon(ENV.br==='chrome'?'#34A853':'#3478F6')}${app}<span class="r">使用 App 期間 ›</span></div></div>`)
-      + st(4,'回到這裡，按下面的 <b>「再試一次」</b>')
-      + `<div class="gnote">如果還是不行：點網址列左邊的「<b>大小</b>」圖示 →「網站設定」→「位置」→ 選「<b>允許</b>」。</div>`;
-  }
-  return st(1,'從螢幕最上面<b>往下滑</b>，打開 <b>「定位」</b>（或「位置」）',
-        `<div class="mock"><div class="mrow hl">${icon('#3478F6')}定位<span class="sw"></span></div></div>`)
-    + st(2,'點網址列左邊的 <b>小圖示</b> → <b>「權限」</b> → <b>「位置」</b>',
-        `<div class="mock"><div class="mrow">${icon('#5F6368')}權限<span class="r">›</span></div><div class="mrow hl">${icon('#5F6368')}位置<span class="r">允許</span></div></div>`)
-    + st(3,'改成 <b>「允許」</b>，再按下面的 <b>「再試一次」</b>');
+  return `<div class="steps">${h}</div>`;
 }
 function renderGuide(){
   const t={loc:['位置被關掉了','照下面做一次，以後就不用再設定'],
@@ -638,16 +671,17 @@ function renderGuide(){
   $('gTabs').style.display = guideKind==='line' ? 'none' : '';
   $('gTabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.os===guideOs));
   $('gBody').innerHTML = stepsHtml(guideKind, guideOs);
-  $('gRetry').style.display = guideKind==='loc' ? '' : 'none';
+  $('gFoot').style.display = guideKind==='loc' ? '' : 'none';
+  $('gBody').scrollTop = 0;
 }
 function openGuide(kind){
   // 定位教學優先：定位有問題時，不讓羅盤教學蓋掉它
   if(kind==='compass' && (gpsErr===1||gpsErr===2||($('guideMask').classList.contains('on') && guideKind==='loc'))){ compassPending=true; return; }
   guideKind=kind; guideOs=ENV.os; renderGuide();
-  $('guideMask').classList.add('on'); document.body.style.overflow='hidden';
+  if(!$('guideMask').classList.contains('on')) lockScroll(); $('guideMask').classList.add('on');
   if(kind==='loc') speak('位置被關掉了，請照畫面上的步驟打開', true);
 }
-function closeGuide(){ $('guideMask').classList.remove('on'); document.body.style.overflow='';
+function closeGuide(){ if($('guideMask').classList.contains('on')) unlockScroll(); $('guideMask').classList.remove('on');
   if(guideKind==='loc' && compassPending && gpsErr===null){ compassPending=false; setTimeout(()=>openGuide('compass'),400); } }
 $('guideX').addEventListener('click', closeGuide);
 $('guideMask').addEventListener('click', e=>{ if(e.target===$('guideMask')) closeGuide(); });
@@ -688,10 +722,10 @@ function maybeShowNews(){
   if(cmpVer(APP_VERSION, seen)<=0) return;
   $('newsBody').innerHTML = CHANGELOG.filter(c=>cmpVer(c.v, seen)>0)
     .map(c=>`<div class="ver">v${c.v}</div><ul>${c.items.map(i=>`<li>${i}</li>`).join('')}</ul>`).join('');
-  $('newsMask').classList.add('on'); document.body.style.overflow='hidden';
+  $('newsMask').classList.add('on'); lockScroll();
   const cur = ls.get('fm_seen','0.0.0'); if(cmpVer(APP_VERSION,cur)>0) ls.set('fm_seen', APP_VERSION);
 }
-function closeNews(){ $('newsMask').classList.remove('on'); document.body.style.overflow=''; }
+function closeNews(){ if($('newsMask').classList.contains('on')) unlockScroll(); $('newsMask').classList.remove('on'); }
 $('newsX').addEventListener('click', closeNews);
 $('newsMask').addEventListener('click', e=>{ if(e.target===$('newsMask')) closeNews(); });
 
