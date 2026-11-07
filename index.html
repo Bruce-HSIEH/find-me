@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="來找我">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FFF4E0">
+<meta name="color-scheme" content="light">
+<title>來找我</title>
+<link rel="apple-touch-icon" href="v1-apple-touch-icon.png">
+<link rel="icon" type="image/png" href="v1-apple-touch-icon.png">
+<!-- 啟動圖（iPhone 各機型） -->
+<link rel="apple-touch-startup-image" media="(device-width:440px) and (device-height:956px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1320x2868.png">
+<link rel="apple-touch-startup-image" media="(device-width:402px) and (device-height:874px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1206x2622.png">
+<link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1290x2796.png">
+<link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1179x2556.png">
+<link rel="apple-touch-startup-image" media="(device-width:420px) and (device-height:912px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1260x2736.png">
+<link rel="apple-touch-startup-image" media="(device-width:428px) and (device-height:926px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1284x2778.png">
+<link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1170x2532.png">
+<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1242x2688.png">
+<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-828x1792.png">
+<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-750x1334.png">
+<link rel="apple-touch-startup-image" media="(device-width:320px) and (device-height:568px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-640x1136.png">
+<style>
+:root{
+  --cream:#FFF4E0; --cream2:#FFE9C7; --brown:#6B4426; --brown2:#9A6B45;
+  --orange:#FF8A3D; --red:#F0645A; --green:#5DBB63; --blush:#FFB3A7; --white:#FFFDF8;
+  color-scheme: light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--cream);color:var(--brown);
+  font-family:-apple-system,"PingFang TC","Noto Sans CJK TC",sans-serif;overscroll-behavior:none}
+body{padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none}
+.screen{display:none;min-height:100%;flex-direction:column;align-items:center;padding:18px 0 24px}
+.screen.on{display:flex}
+h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
+.sub{font-size:19px;line-height:1.55;text-align:center;margin:6px 8px 0;color:var(--brown2)}
+.big-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:360px;
+  min-height:84px;margin-top:18px;border:4px solid var(--brown);border-radius:28px;background:var(--orange);
+  color:#fff;font-size:28px;font-weight:800;letter-spacing:2px;box-shadow:0 6px 0 var(--brown);
+  transition:transform .08s}
+.big-btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--brown)}
+.big-btn.green{background:var(--green)}
+.big-btn.white{background:var(--white);color:var(--brown)}
+.big-btn.small{min-height:64px;font-size:22px}
+.big-btn svg{width:38px;height:38px;flex:none}
+.card{width:100%;max-width:360px;background:var(--white);border:3px solid var(--brown);border-radius:24px;
+  padding:16px 18px;margin-top:16px}
+.card label{display:block;font-size:17px;font-weight:700;margin:8px 0 6px}
+.card input{width:100%;font-size:20px;padding:12px 14px;border:3px solid var(--brown2);border-radius:14px;
+  background:#fff;color:var(--brown);font-family:inherit;user-select:text;-webkit-user-select:text}
+.hint{font-size:15px;color:var(--brown2);margin-top:6px;line-height:1.5}
+.mascot{width:190px;height:190px}
+.mascot-sm{width:120px;height:120px}
+
+/* 找人畫面 */
+#find{justify-content:flex-start}
+.find-title{font-size:26px;font-weight:800;margin-top:6px;white-space:nowrap}
+.dial{position:relative;width:min(78vw,300px);height:min(78vw,300px);margin-top:14px}
+.dial-bg{position:absolute;inset:0}
+#arrow{position:absolute;inset:0;will-change:transform;transition:none}
+#arrowWrap.hide{opacity:.15}
+#nearFace{position:absolute;inset:16%;display:none}
+.dist{font-size:64px;font-weight:900;line-height:1;margin-top:14px;white-space:nowrap}
+.dist small{font-size:30px;margin-left:6px}
+.say{font-size:30px;font-weight:800;margin-top:10px;min-height:40px;color:var(--orange);white-space:nowrap}
+.meta{font-size:15px;color:var(--brown2);margin-top:8px;text-align:center;min-height:20px}
+.row{display:flex;gap:12px;width:100%;max-width:360px}
+.row .big-btn{flex:1}
+.status-pill{display:inline-flex;align-items:center;gap:8px;font-size:16px;padding:6px 14px;border-radius:99px;
+  background:var(--cream2);border:2px solid var(--brown2);margin-top:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:#bbb}
+.dot.ok{background:var(--green)} .dot.wait{background:var(--orange)} .dot.bad{background:var(--red)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:17px;margin-top:10px;padding:8px 14px;
+  border-radius:99px;border:2px solid var(--brown2);background:var(--white)}
+.toggle svg{width:24px;height:24px}
+.share-box{width:100%;max-width:360px}
+
+/* 開機畫面 */
+#boot{position:fixed;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;z-index:50;transition:opacity .35s}
+#boot .mascot{opacity:0;transform:scale(.6)}
+#boot.go .mascot{animation:pop .6s cubic-bezier(.3,1.6,.5,1) forwards}
+#boot .bt{font-size:34px;font-weight:900;margin-top:10px;opacity:0;letter-spacing:4px}
+#boot.go .bt{animation:fadeup .5s .35s forwards}
+#boot.out{opacity:0;pointer-events:none}
+@keyframes pop{to{opacity:1;transform:scale(1)}}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.bob{animation:bob 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.pulse{animation:pulse 1.4s ease-in-out infinite}
+
+/* 視窗 */
+.mask{position:fixed;inset:0;background:rgba(80,50,20,.45);display:none;align-items:center;justify-content:center;z-index:40;padding:20px}
+.mask.on{display:flex}
+.modal{position:relative;width:100%;max-width:360px;max-height:62vh;overflow:auto;background:var(--white);
+  border:4px solid var(--brown);border-radius:26px;padding:22px 20px 18px}
+.modal h2{margin:0 0 10px;font-size:24px}
+.modal .x{position:absolute;right:10px;top:10px;width:44px;height:44px;border:none;background:none;padding:6px}
+.modal ul{padding-left:20px;font-size:17px;line-height:1.6;margin:6px 0}
+.ver{font-weight:800;margin-top:10px}
+.foot{font-size:13px;color:var(--brown2);margin-top:auto;padding-top:22px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translateX(-50%);
+  background:var(--brown);color:#fff;font-size:18px;padding:12px 20px;border-radius:99px;opacity:0;
+  transition:opacity .25s;z-index:60;white-space:nowrap;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- 開機畫面 -->
+<div id="boot">
+  <svg class="mascot" viewBox="0 0 200 200" aria-hidden="true"><use href="#mascotSym"/></svg>
+  <div class="bt">來找我</div>
+</div>
+
+<!-- 共用 SVG -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="mascotSym" viewBox="0 0 200 200">
+      <!-- 圓滾滾的定位針小人 -->
+      <ellipse cx="100" cy="186" rx="38" ry="8" fill="#E9CFA6"/>
+      <path d="M100 178 C70 140 42 118 42 82 a58 58 0 0 1 116 0 c0 36 -28 58 -58 96z" fill="#FF8A3D" stroke="#6B4426" stroke-width="6" stroke-linejoin="round"/>
+      <circle cx="100" cy="82" r="38" fill="#FFFDF8" stroke="#6B4426" stroke-width="5"/>
+      <circle cx="86" cy="80" r="5.5" fill="#6B4426"/><circle cx="114" cy="80" r="5.5" fill="#6B4426"/>
+      <circle cx="88" cy="78" r="1.8" fill="#fff"/><circle cx="116" cy="78" r="1.8" fill="#fff"/>
+      <ellipse cx="76" cy="93" rx="7" ry="4.5" fill="#FFB3A7"/><ellipse cx="124" cy="93" rx="7" ry="4.5" fill="#FFB3A7"/>
+      <path d="M92 94 q8 8 16 0" fill="none" stroke="#6B4426" stroke-width="4" stroke-linecap="round"/>
+      <path d="M150 36 l10 -10 M160 52 l14 -2 M140 22 l2 -14" stroke="#6B4426" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icPin" viewBox="0 0 40 40"><path d="M20 37 C12 27 7 22 7 15 a13 13 0 0 1 26 0 c0 7 -5 12 -13 22z" fill="#fff" stroke="#6B4426" stroke-width="3"/><circle cx="20" cy="15" r="5" fill="#FF8A3D" stroke="#6B4426" stroke-width="2.5"/></symbol>
+    <symbol id="icGo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M20 9 L28 27 L20 22 L12 27z" fill="#FF8A3D" stroke="#6B4426" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+    <symbol id="icShare" viewBox="0 0 40 40"><rect x="7" y="16" width="26" height="20" rx="5" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M20 26 V5 M13 11 l7 -7 7 7" fill="none" stroke="#6B4426" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icCopy" viewBox="0 0 40 40"><rect x="12" y="12" width="21" height="23" rx="5" fill="#fff" stroke="#6B4426" stroke-width="3"/><rect x="6" y="5" width="21" height="23" rx="5" fill="#FFE9C7" stroke="#6B4426" stroke-width="3"/></symbol>
+    <symbol id="icPhone" viewBox="0 0 40 40"><path d="M11 5 l7 2 2 8 -5 3 c2 5 5 8 10 10 l3 -5 8 2 2 7 c-2 4 -6 5 -10 4 C17 33 7 23 5 12 c-1 -4 1 -6 6 -7z" fill="#fff" stroke="#6B4426" stroke-width="3" stroke-linejoin="round"/></symbol>
+    <symbol id="icStop" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#F0645A" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="icX" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#FFE9C7" stroke="#6B4426" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#6B4426" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="icSpk" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#FFE9C7" stroke="#6B4426" stroke-width="3" stroke-linejoin="round"/><path d="M27 14 q5 6 0 12 M31 9 q10 11 0 22" fill="none" stroke="#6B4426" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="icMute" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#eee" stroke="#9A6B45" stroke-width="3" stroke-linejoin="round"/><path d="M27 15 l10 10 M37 15 l-10 10" stroke="#9A6B45" stroke-width="3" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- 首頁（分享的人） -->
+<section class="screen" id="home">
+  <svg class="mascot bob" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
+  <h1>來找我</h1>
+  <div class="sub">傳一個連結給家人<br>他們跟著<b>大箭頭</b>走，就會走到你身邊</div>
+  <div class="card">
+    <label for="myName">對方要怎麼叫你？</label>
+    <input id="myName" maxlength="8" placeholder="例如：兒子">
+    <label for="myPhone">你的手機號碼（選填）</label>
+    <input id="myPhone" type="tel" inputmode="tel" maxlength="15" placeholder="對方畫面會有「打給你」按鈕">
+  </div>
+  <button class="big-btn" id="btnCreate"><svg><use href="#icPin"/></svg>開始分享位置</button>
+  <div class="hint" style="max-width:360px;text-align:center">連結 2 小時後失效，按「結束」就刪除位置</div>
+  <div class="foot">Copyright © 2026 大樹・<span class="vtxt"></span></div>
+</section>
+
+<!-- 對方打開連結的歡迎畫面 -->
+<section class="screen" id="welcome">
+  <svg class="mascot bob" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
+  <h1 id="welTitle">兒子在等你</h1>
+  <div class="sub">按下面的大按鈕<br>然後<b>跟著箭頭走</b>就好</div>
+  <button class="big-btn green pulse" id="btnStart" style="min-height:110px;font-size:34px"><svg style="width:48px;height:48px"><use href="#icGo"/></svg>開始找</button>
+  <div class="card" style="font-size:17px;line-height:1.6">
+    手機會問兩次「允許嗎？」<br>都請按 <b>「允許」</b>
+  </div>
+  <div class="foot">Copyright © 2026 大樹・<span class="vtxt"></span></div>
+</section>
+
+<!-- 連結失效 -->
+<section class="screen" id="expired">
+  <svg class="mascot" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
+  <h1>連結過期了</h1>
+  <div class="sub">請對方再傳一次新的連結</div>
+  <button class="big-btn white" id="btnGoHome">回首頁</button>
+</section>
+
+<!-- 找人畫面（兩邊共用） -->
+<section class="screen" id="find">
+  <div class="find-title" id="findTitle">跟著箭頭走</div>
+  <div class="status-pill"><span class="dot wait" id="dot"></span><span id="statusTxt">連線中…</span></div>
+  <div class="dial">
+    <svg class="dial-bg" viewBox="0 0 300 300">
+      <circle cx="150" cy="150" r="140" fill="#FFFDF8" stroke="#6B4426" stroke-width="7"/>
+      <circle cx="150" cy="150" r="112" fill="none" stroke="#FFE9C7" stroke-width="10" stroke-dasharray="4 14"/>
+    </svg>
+    <div id="arrowWrap">
+      <svg id="arrow" viewBox="0 0 300 300">
+        <path d="M150 34 L224 196 Q228 206 218 204 L150 176 L82 204 Q72 206 76 196 Z" fill="#FF8A3D" stroke="#6B4426" stroke-width="8" stroke-linejoin="round"/>
+        <path d="M150 64 L196 168 L150 150z" fill="#FFB27A"/>
+      </svg>
+    </div>
+    <svg id="nearFace" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
+  </div>
+  <div class="dist" id="dist">--</div>
+  <div class="say" id="say"></div>
+  <div class="meta" id="meta"></div>
+
+  <div class="share-box" id="shareBox">
+    <button class="big-btn" id="btnShare"><svg><use href="#icShare"/></svg>用 LINE 傳連結</button>
+    <button class="big-btn white small" id="btnCopy"><svg><use href="#icCopy"/></svg>複製連結</button>
+  </div>
+  <div class="row" style="margin-top:4px">
+    <a class="big-btn green small" id="btnCall" href="#" style="text-decoration:none;display:none"><svg><use href="#icPhone"/></svg><span id="callTxt">打電話</span></a>
+    <button class="big-btn white small" id="btnEnd"><svg><use href="#icStop"/></svg>結束</button>
+  </div>
+  <button class="toggle" id="btnVoice"><svg id="voiceIc"><use href="#icSpk"/></svg><span id="voiceTxt">語音提示：開</span></button>
+</section>
+
+<!-- 更新說明 -->
+<div class="mask" id="newsMask">
+  <div class="modal">
+    <button class="x" id="newsX" aria-label="關閉"><svg><use href="#icX"/></svg></button>
+    <h2>更新說明</h2>
+    <div id="newsBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+// ===== 版本與改版紀錄 =====
+const APP_VERSION = '1.0.0';
+const CHANGELOG = [
+  { v:'1.0.0', items:['第一版上線：分享位置、跟著箭頭走、距離與語音提示、打電話按鈕'] },
+];
+
+// ===== Firebase 設定 =====
+const firebaseConfig = {
+  apiKey: "AIzaSyDPl-z9JVKiBtpwHUe6FJ2-GRuUbY5wnnQ",
+  authDomain: "find-me-2ee50.firebaseapp.com",
+  databaseURL: "https://find-me-2ee50-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "find-me-2ee50",
+  storageBucket: "find-me-2ee50.firebasestorage.app",
+  messagingSenderId: "762332795292",
+  appId: "1:762332795292:web:31f16ccafe63ab29f9b859"
+};
+
+// ===== 全域狀態（開機就會用到，先宣告避免 TDZ） =====
+const $ = id => document.getElementById(id);
+const ROOM_TTL = 2*60*60*1000;      // 房間 2 小時失效
+const STALE_MS = 30*1000;           // 對方 30 秒沒更新 → 顯示斷線
+const WRITE_MS = 2000;              // 每 2 秒最多寫一次
+const NEAR_M = 15;                  // 15 公尺內算「到了」
+let db = null, fb = null;
+let role = null;        // 'a' = 分享的人, 'b' = 打開連結的人
+let roomId = null, roomCreated = 0;
+let me = null, other = null;        // {lat,lng,acc,t}
+let heading = null, smoothHead = null, shownRot = 0;
+let lastWrite = 0, watchId = null, unsub = null;
+let voiceOn = true, lastSpeak = 0, lastSaid = '', arrived = false;
+let audioCtx = null, wakeLock = null, busy = false;
+let otherName = '對方';
+
+const ls = {
+  get(k, d=null){ try{ const v = localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+
+document.querySelectorAll('.vtxt').forEach(e=>e.textContent='v'+APP_VERSION);
+
+// ===== 小工具 =====
+function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('on'),1800); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on', s.id===id)); }
+function randId(n=24){
+  const abc='abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const a=new Uint32Array(n); crypto.getRandomValues(a);
+  return Array.from(a, x=>abc[x%abc.length]).join('');
+}
+const rad = d=>d*Math.PI/180, deg = r=>r*180/Math.PI;
+function distM(a,b){
+  const R=6371000, dLat=rad(b.lat-a.lat), dLng=rad(b.lng-a.lng);
+  const h=Math.sin(dLat/2)**2 + Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+function bearing(a,b){
+  const y=Math.sin(rad(b.lng-a.lng))*Math.cos(rad(b.lat));
+  const x=Math.cos(rad(a.lat))*Math.sin(rad(b.lat))-Math.sin(rad(a.lat))*Math.cos(rad(b.lat))*Math.cos(rad(b.lng-a.lng));
+  return (deg(Math.atan2(y,x))+360)%360;
+}
+const wrap180 = d=>((d%360)+540)%360-180;
+function fmtDist(m){
+  if(m<1000) return {n:String(Math.round(m/5)*5||Math.round(m)), u:'公尺'};
+  return {n:(m/1000).toFixed(1), u:'公里'};
+}
+function speakNum(m){ return m<1000 ? `${Math.round(m/10)*10||Math.round(m)}公尺` : `${(m/1000).toFixed(1)}公里`; }
+
+// ===== 音效 =====
+function initAudio(){
+  if(audioCtx) return;
+  try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)({latencyHint:'playback'}); }catch(e){}
+}
+function ding(freqs=[880,1320]){
+  if(!audioCtx) return;
+  try{
+    const t0=audioCtx.currentTime;
+    freqs.forEach((f,i)=>{
+      const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+      o.type='sine'; o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,t0+i*0.15); g.gain.exponentialRampToValueAtTime(0.25,t0+i*0.15+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+i*0.15+0.5);
+      o.connect(g).connect(audioCtx.destination); o.start(t0+i*0.15); o.stop(t0+i*0.15+0.55);
+    });
+  }catch(e){}
+}
+function speak(text, force=false){
+  if(!voiceOn || !('speechSynthesis' in window)) return;
+  const now=Date.now();
+  if(!force && (now-lastSpeak<8000 || (text===lastSaid && now-lastSpeak<15000))) return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.lang='zh-TW'; u.rate=0.9;
+    speechSynthesis.speak(u); lastSpeak=now; lastSaid=text;
+  }catch(e){}
+}
+
+// ===== 權限（一定要在使用者點擊時呼叫） =====
+async function askCompass(){
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
+      const r = await DeviceOrientationEvent.requestPermission();
+      if(r!=='granted'){ toast('沒有開羅盤，箭頭會不準'); return; }
+    }
+  }catch(e){}
+  const handler = e=>{
+    let h=null;
+    if(typeof e.webkitCompassHeading==='number') h=e.webkitCompassHeading;   // iPhone 直接給
+    else if(e.absolute && typeof e.alpha==='number') h=(360-e.alpha)%360;      // Android
+    if(h===null) return;
+    const so = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+    h=(h+so+360)%360;
+    // 低通濾波（像 IIR filter），處理 359→0 的繞圈
+    smoothHead = smoothHead===null ? h : (smoothHead + wrap180(h-smoothHead)*0.25 + 360)%360;
+    heading = smoothHead;
+  };
+  window.addEventListener('deviceorientationabsolute', handler);
+  window.addEventListener('deviceorientation', handler);
+}
+function startGPS(){
+  if(!('geolocation' in navigator)){ setStatus('bad','這支手機不支援定位'); return; }
+  watchId = navigator.geolocation.watchPosition(p=>{
+    me = {lat:p.coords.latitude, lng:p.coords.longitude, acc:Math.round(p.coords.accuracy||0), t:Date.now()};
+    pushMe();
+  }, err=>{
+    if(err.code===1) setStatus('bad','沒有允許定位，請到設定打開');
+    else setStatus('wait','找不到 GPS 訊號，請到戶外');
+  }, {enableHighAccuracy:true, maximumAge:1000, timeout:20000});
+}
+async function keepAwake(){
+  try{ if('wakeLock' in navigator){ wakeLock = await navigator.wakeLock.request('screen'); } }catch(e){}
+}
+
+// ===== Firebase =====
+async function initDb(){
+  if(db) return true;
+  try{
+    const [appMod, dbMod] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js')
+    ]);
+    const app = appMod.initializeApp(firebaseConfig);
+    db = dbMod.getDatabase(app); fb = dbMod;
+    return true;
+  }catch(e){ console.warn(e); setStatus('bad','連不上伺服器，請檢查網路'); return false; }
+}
+function pushMe(){
+  if(!db || !me || !roomId) return;
+  const now=Date.now();
+  if(now-lastWrite<WRITE_MS) return;
+  lastWrite=now;
+  fb.set(fb.ref(db, `rooms/${roomId}/${role}`), me).catch(e=>console.warn(e));
+}
+function listenOther(){
+  const otherKey = role==='a'?'b':'a';
+  unsub = fb.onValue(fb.ref(db, `rooms/${roomId}/${otherKey}`), snap=>{
+    const v=snap.val();
+    other = (v && typeof v.lat==='number') ? v : null;
+  });
+}
+
+// ===== 畫面更新迴圈 =====
+function setStatus(cls, txt){ $('dot').className='dot '+cls; $('statusTxt').textContent=txt; }
+function tick(){
+  requestAnimationFrame(tick);
+  if(!$('find').classList.contains('on')) return;
+  const now=Date.now();
+  if(role==='a' && now-roomCreated>ROOM_TTL){ endRoom(); show('expired'); return; }
+
+  if(!me){ setStatus('wait','正在找你的位置…'); $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=''; return; }
+  if(!other){
+    setStatus('wait', role==='a' ? `等${otherName}打開連結…` : `等${otherName}的位置…`);
+    $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=`你的 GPS 誤差約 ${me.acc} 公尺`;
+    $('arrowWrap').classList.add('hide'); return;
+  }
+  const age = now-other.t;
+  if(age>STALE_MS) setStatus('bad', `${otherName}的位置 ${Math.round(age/1000)} 秒沒更新`);
+  else setStatus('ok', `已連上${otherName}`);
+  if(role==='a') $('shareBox').style.display='none';
+
+  const d = distM(me, other);
+  const err = Math.max(me.acc||0, other.acc||0);
+  const isNear = d < Math.max(NEAR_M, Math.min(err, 30));
+  $('arrowWrap').classList.remove('hide');
+
+  if(isNear){
+    $('arrowWrap').style.display='none'; $('nearFace').style.display='block';
+    $('dist').innerHTML='就在附近！';
+    $('say').textContent='看看四周，揮揮手';
+    if(!arrived){ arrived=true; ding([784,988,1318]); speak(`${otherName}就在附近，看看四周`, true); if(navigator.vibrate) navigator.vibrate([200,100,200]); }
+  }else{
+    if(arrived && d > NEAR_M+15) arrived=false;
+    $('arrowWrap').style.display=''; $('nearFace').style.display='none';
+    const f=fmtDist(d); $('dist').innerHTML=`${f.n}<small>${f.u}</small>`;
+    const b = bearing(me, other);
+    if(heading===null){
+      $('say').textContent='手機拿平，慢慢轉一圈';
+      setRot(b);   // 沒有羅盤：箭頭以「北方朝上」顯示
+    }else{
+      const rel = wrap180(b-heading);
+      setRot(rel);
+      let s;
+      if(Math.abs(rel)<=30) s='往前走';
+      else if(Math.abs(rel)>=150) s='往後轉';
+      else s = rel>0 ? '往右轉' : '往左轉';
+      $('say').textContent=s;
+      speak(s==='往前走' ? `往前走，還有${speakNum(d)}` : s);
+    }
+  }
+  $('meta').textContent = `GPS 誤差約 ${err} 公尺・${Math.max(0,Math.round(age/1000))} 秒前更新`;
+}
+function setRot(target){
+  shownRot += wrap180(target-shownRot)*0.2;   // 平滑轉動，不會亂跳
+  $('arrow').style.transform=`rotate(${shownRot}deg)`;
+}
+
+// ===== 流程 =====
+function shareUrl(){
+  const u = new URL(location.origin + location.pathname);
+  u.searchParams.set('r', roomId);
+  u.searchParams.set('c', String(roomCreated));
+  const n = ($('myName').value||'').trim(); if(n) u.searchParams.set('n', n);
+  const p = ($('myPhone').value||'').replace(/[^\d+]/g,''); if(p) u.searchParams.set('p', p);
+  u.searchParams.set('openExternalBrowser','1');   // 從 LINE 點開時，改用 Safari 開啟
+  return u.toString();
+}
+async function startAsSharer(resume){
+  if(busy) return; busy=true;
+  initAudio(); speak('',true);
+  ls.set('fm_name', ($('myName').value||'').trim());
+  ls.set('fm_phone', ($('myPhone').value||'').trim());
+  role='a';
+  if(resume){ roomId=resume.id; roomCreated=resume.c; }
+  else { roomId=randId(); roomCreated=Date.now(); ls.set('fm_room',{id:roomId,c:roomCreated}); }
+  otherName='對方';
+  $('findTitle').textContent='對方會跟著箭頭找你';
+  $('shareBox').style.display='';
+  $('btnCall').style.display='none';
+  show('find');
+  await askCompass(); startGPS(); keepAwake();
+  if(await initDb()){ listenOther(); pushMe(); }
+  busy=false;
+}
+async function startAsFinder(){
+  if(busy) return; busy=true;
+  initAudio(); speak('',true);
+  role='b'; show('find');
+  $('shareBox').style.display='none';
+  await askCompass(); startGPS(); keepAwake();
+  if(await initDb()){ listenOther(); pushMe(); }
+  speak(`跟著箭頭走，就會找到${otherName}`, true);
+  busy=false;
+}
+async function endRoom(){
+  try{
+    if(watchId!==null) navigator.geolocation.clearWatch(watchId);
+    if(unsub) unsub();
+    if(db && roomId){
+      await fb.remove(fb.ref(db, `rooms/${roomId}/${role}`));
+      if(role==='a') await fb.remove(fb.ref(db, `rooms/${roomId}/b`)).catch(()=>{});
+    }
+  }catch(e){}
+  try{ if(wakeLock) wakeLock.release(); }catch(e){}
+  watchId=null; unsub=null; me=null; other=null; arrived=false;
+  if(role==='a') ls.del('fm_room');
+}
+
+// ===== 按鈕 =====
+let resumeRoom = null;
+$('btnCreate').addEventListener('click', ()=>{ ding([660]); startAsSharer(resumeRoom); });
+$('btnStart').addEventListener('click', ()=>{ ding([660]); startAsFinder(); });
+$('btnGoHome').addEventListener('click', ()=>{ location.replace(location.pathname); });
+$('btnShare').addEventListener('click', async ()=>{
+  const url=shareUrl();
+  const nm=($('myName').value||'').trim()||'我';
+  const text=`${nm}在這裡等你，點連結後按「開始找」，跟著箭頭走就到了：`;
+  try{
+    if(navigator.share){ await navigator.share({title:'來找我', text, url}); return; }
+  }catch(e){ if(e && e.name==='AbortError') return; }
+  location.href='https://line.me/R/msg/text/?'+encodeURIComponent(text+'\n'+url);
+});
+$('btnCopy').addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(shareUrl()); toast('已複製連結'); }catch(e){ toast('複製失敗，請改用分享'); }
+});
+$('btnEnd').addEventListener('click', async ()=>{
+  if(!confirmEnd()) return;
+  await endRoom(); speechSynthesis && speechSynthesis.cancel();
+  location.replace(location.pathname);
+});
+function confirmEnd(){ return true; }
+$('btnVoice').addEventListener('click', ()=>{
+  voiceOn=!voiceOn; ls.set('fm_voice', voiceOn); renderVoice();
+  if(!voiceOn){ try{ speechSynthesis.cancel(); }catch(e){} }
+});
+function renderVoice(){
+  $('voiceTxt').textContent='語音提示：'+(voiceOn?'開':'關');
+  $('voiceIc').innerHTML=`<use href="#${voiceOn?'icSpk':'icMute'}"/>`;
+}
+
+// ===== 自動更新 =====
+function cmpVer(a,b){ const x=a.split('.').map(Number), y=b.split('.').map(Number); for(let i=0;i<3;i++){ if((x[i]||0)!==(y[i]||0)) return (x[i]||0)-(y[i]||0); } return 0; }
+async function checkUpdate(){
+  if(!location.hostname.endsWith('github.io')) return;
+  if($('find').classList.contains('on')) return;   // 找人中不要重新載入
+  try{
+    const r = await fetch('version.json?t='+Date.now(), {cache:'no-store'});
+    const j = await r.json();
+    if(j.version && cmpVer(j.version, APP_VERSION)>0){
+      const u = new URL(location.href); u.searchParams.set('v', j.version);
+      location.replace(u.pathname + u.search);
+    }
+  }catch(e){}
+}
+document.addEventListener('visibilitychange', ()=>{
+  if(document.visibilityState==='visible'){
+    checkUpdate();
+    document.getAnimations && document.getAnimations().forEach(a=>{ try{ a.play(); }catch(e){} });
+    if($('find').classList.contains('on')) keepAwake();
+  }else{ try{ speechSynthesis.cancel(); }catch(e){} }
+});
+window.addEventListener('pageshow', e=>{ if(e.persisted) checkUpdate(); });
+
+// ===== 更新說明（只往前記） =====
+function maybeShowNews(){
+  const seen = ls.get('fm_seen', null);
+  if(seen===null){ ls.set('fm_seen', APP_VERSION); return; }   // 第一次使用不跳
+  if(cmpVer(APP_VERSION, seen)<=0) return;
+  $('newsBody').innerHTML = CHANGELOG.filter(c=>cmpVer(c.v, seen)>0)
+    .map(c=>`<div class="ver">v${c.v}</div><ul>${c.items.map(i=>`<li>${i}</li>`).join('')}</ul>`).join('');
+  $('newsMask').classList.add('on'); document.body.style.overflow='hidden';
+  const cur = ls.get('fm_seen','0.0.0'); if(cmpVer(APP_VERSION,cur)>0) ls.set('fm_seen', APP_VERSION);
+}
+function closeNews(){ $('newsMask').classList.remove('on'); document.body.style.overflow=''; }
+$('newsX').addEventListener('click', closeNews);
+$('newsMask').addEventListener('click', e=>{ if(e.target===$('newsMask')) closeNews(); });
+
+// ===== 開機 =====
+function route(){
+  const q = new URLSearchParams(location.search);
+  if(q.has('v')){ q.delete('v'); history.replaceState(null,'', location.pathname + (q.toString()?'?'+q:'')); }
+  voiceOn = ls.get('fm_voice', true); renderVoice();
+  $('myName').value = ls.get('fm_name','') || '';
+  $('myPhone').value = ls.get('fm_phone','') || '';
+  const r = q.get('r');
+  if(r && r.length>=20){
+    const c = Number(q.get('c')||0);
+    if(c && Date.now()-c>ROOM_TTL){ show('expired'); return; }
+    roomId=r; roomCreated=c||Date.now();
+    otherName = (q.get('n')||'').slice(0,8) || '對方';
+    $('welTitle').textContent = `${otherName}在等你`;
+    $('findTitle').textContent = `跟著箭頭找${otherName}`;
+    const p=(q.get('p')||'').replace(/[^\d+]/g,'');
+    if(p){ $('btnCall').href='tel:'+p; $('btnCall').style.display=''; $('callTxt').textContent='打給'+otherName; }
+    show('welcome'); return;
+  }
+  const saved = ls.get('fm_room', null);
+  if(saved && saved.id && Date.now()-saved.c < ROOM_TTL){
+    show('home');
+    $('btnCreate').innerHTML = '<svg><use href="#icPin"/></svg>繼續分享位置';
+    resumeRoom = saved;
+    return;
+  }
+  show('home');
+}
+async function boot(){
+  route();
+  const t0 = performance.now();
+  setTimeout(()=>$('boot').classList.add('go'), 150);
+  const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r=>setTimeout(r,1200))]);
+  checkUpdate();
+  await fontsReady;
+  const wait = Math.max(0, 2400-(performance.now()-t0));
+  await Promise.race([new Promise(r=>setTimeout(r,wait)), new Promise(r=>setTimeout(r,4000))]);
+  $('boot').classList.add('out');
+  setTimeout(()=>{ $('boot').style.display='none'; }, 400);
+  setTimeout(maybeShowNews, 700);
+  requestAnimationFrame(tick);
+}
+// 測試用掛鉤
+window.__fm = { get state(){ return {role,roomId,me,other,heading}; }, set(o){ if(o.me) me=o.me; if(o.other) other=o.other; if('heading' in o) heading=o.heading; } };
+boot();
+</script>
+</body>
+</html>
