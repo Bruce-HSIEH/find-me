@@ -7,108 +7,145 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="來找我">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#FFF4E0">
+<meta name="theme-color" content="#F7F2EA">
 <meta name="color-scheme" content="light">
 <title>來找我</title>
-<link rel="apple-touch-icon" href="v1-apple-touch-icon.png">
-<link rel="icon" type="image/png" href="v1-apple-touch-icon.png">
+<link rel="apple-touch-icon" href="v2-apple-touch-icon.png">
+<link rel="icon" type="image/png" href="v2-apple-touch-icon.png">
 <!-- 啟動圖（iPhone 各機型） -->
-<link rel="apple-touch-startup-image" media="(device-width:440px) and (device-height:956px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1320x2868.png">
-<link rel="apple-touch-startup-image" media="(device-width:402px) and (device-height:874px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1206x2622.png">
-<link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1290x2796.png">
-<link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1179x2556.png">
-<link rel="apple-touch-startup-image" media="(device-width:420px) and (device-height:912px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1260x2736.png">
-<link rel="apple-touch-startup-image" media="(device-width:428px) and (device-height:926px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1284x2778.png">
-<link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1170x2532.png">
-<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1125x2436.png">
-<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:3)" href="splash/v1-1242x2688.png">
-<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-828x1792.png">
-<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-750x1334.png">
-<link rel="apple-touch-startup-image" media="(device-width:320px) and (device-height:568px) and (-webkit-device-pixel-ratio:2)" href="splash/v1-640x1136.png">
+<link rel="apple-touch-startup-image" media="(device-width:440px) and (device-height:956px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1320x2868.png">
+<link rel="apple-touch-startup-image" media="(device-width:402px) and (device-height:874px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1206x2622.png">
+<link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1290x2796.png">
+<link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1179x2556.png">
+<link rel="apple-touch-startup-image" media="(device-width:420px) and (device-height:912px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1260x2736.png">
+<link rel="apple-touch-startup-image" media="(device-width:428px) and (device-height:926px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1284x2778.png">
+<link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1170x2532.png">
+<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:3)" href="splash/v2-1242x2688.png">
+<link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash/v2-828x1792.png">
+<link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash/v2-750x1334.png">
+<link rel="apple-touch-startup-image" media="(device-width:320px) and (device-height:568px) and (-webkit-device-pixel-ratio:2)" href="splash/v2-640x1136.png">
 <style>
 :root{
-  --cream:#FFF4E0; --cream2:#FFE9C7; --brown:#6B4426; --brown2:#9A6B45;
-  --orange:#FF8A3D; --red:#F0645A; --green:#5DBB63; --blush:#FFB3A7; --white:#FFFDF8;
+  --bg:#F7F2EA; --bg2:#EEE5D8; --card:#FFFDF9; --ink:#3E2D24; --ink2:#8C7666; --line:#E2D6C6;
+  --ac:#B08D57; --ac-d:#86683A; --ac-l:#D9C29A; --ac-xl:#F4EDE0;
+  --blush:#F4BFB2; --red:#D9776B; --ok:#7FA27A;
   color-scheme: light;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:var(--cream);color:var(--brown);
+html,body{margin:0;height:100%;color:var(--ink);
   font-family:-apple-system,"PingFang TC","Noto Sans CJK TC",sans-serif;overscroll-behavior:none}
-body{padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none}
-.screen{display:none;min-height:100%;flex-direction:column;align-items:center;padding:18px 0 24px}
+html{background:var(--bg)}
+body{padding:env(safe-area-inset-top) 20px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;
+  background:radial-gradient(120% 60% at 50% 0%, var(--card) 0%, var(--bg) 70%) fixed}
+.screen{display:none;min-height:100%;flex-direction:column;align-items:center;padding:22px 0 26px}
 .screen.on{display:flex}
-h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
-.sub{font-size:19px;line-height:1.55;text-align:center;margin:6px 8px 0;color:var(--brown2)}
-.big-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:360px;
-  min-height:84px;margin-top:18px;border:4px solid var(--brown);border-radius:28px;background:var(--orange);
-  color:#fff;font-size:28px;font-weight:800;letter-spacing:2px;box-shadow:0 6px 0 var(--brown);
-  transition:transform .08s}
-.big-btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--brown)}
-.big-btn.green{background:var(--green)}
-.big-btn.white{background:var(--white);color:var(--brown)}
-.big-btn.small{min-height:64px;font-size:22px}
-.big-btn svg{width:38px;height:38px;flex:none}
-.card{width:100%;max-width:360px;background:var(--white);border:3px solid var(--brown);border-radius:24px;
-  padding:16px 18px;margin-top:16px}
-.card label{display:block;font-size:17px;font-weight:700;margin:8px 0 6px}
-.card input{width:100%;font-size:20px;padding:12px 14px;border:3px solid var(--brown2);border-radius:14px;
-  background:#fff;color:var(--brown);font-family:inherit;user-select:text;-webkit-user-select:text}
-.hint{font-size:15px;color:var(--brown2);margin-top:6px;line-height:1.5}
-.mascot{width:190px;height:190px}
-.mascot-sm{width:120px;height:120px}
+h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-spacing:4px}
+.eyebrow{font-size:12px;letter-spacing:4px;color:var(--ink2);font-weight:600;margin-top:4px}
+.sub{font-size:18px;line-height:1.7;text-align:center;margin:10px 8px 0;color:var(--ink2)}
+.sub b{color:var(--ink)}
+.big-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:350px;
+  min-height:76px;margin-top:18px;border:none;border-radius:26px;
+  background:linear-gradient(180deg,var(--ac) 0%,var(--ac-d) 100%);
+  color:#fff;font-size:25px;font-weight:700;letter-spacing:3px;
+  box-shadow:0 12px 26px -10px var(--ac-d), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .12s ease}
+.big-btn:active{transform:scale(.97)}
+.big-btn.dark{background:linear-gradient(180deg,#5A4537 0%,var(--ink) 100%);box-shadow:0 12px 26px -12px var(--ink), inset 0 1px 0 rgba(255,255,255,.2)}
+.big-btn.white{background:var(--card);color:var(--ink);border:1.5px solid var(--line);
+  box-shadow:0 8px 20px -14px rgba(62,45,36,.5)}
+.big-btn.small{min-height:62px;font-size:20px;letter-spacing:2px;margin-top:12px}
+.big-btn svg{width:34px;height:34px;flex:none}
+.card{width:100%;max-width:350px;background:rgba(255,253,249,.9);border:1px solid var(--line);border-radius:24px;
+  padding:16px 20px 20px;margin-top:20px;box-shadow:0 14px 34px -22px rgba(62,45,36,.45)}
+.card label{display:block;font-size:15px;font-weight:600;margin:12px 0 8px;color:var(--ink2);letter-spacing:1px}
+.card input{width:100%;font-size:19px;padding:13px 16px;border:1.5px solid var(--line);border-radius:14px;
+  background:#fff;color:var(--ink);font-family:inherit;user-select:text;-webkit-user-select:text;outline:none}
+.card input:focus{border-color:var(--ac)}
+.card input::placeholder{color:#C2B3A4}
+.hint{font-size:14px;color:var(--ink2);margin-top:12px;line-height:1.5;letter-spacing:.5px}
+.mascot{width:170px;height:170px}
 
 /* 找人畫面 */
 #find{justify-content:flex-start}
-.find-title{font-size:26px;font-weight:800;margin-top:6px;white-space:nowrap}
-.dial{position:relative;width:min(78vw,300px);height:min(78vw,300px);margin-top:14px}
+.find-title{font-size:24px;font-weight:800;margin-top:6px;white-space:nowrap;letter-spacing:3px}
+.dial{position:relative;width:min(76vw,290px);height:min(76vw,290px);margin-top:18px;border-radius:50%;
+  box-shadow:0 24px 50px -28px rgba(62,45,36,.55)}
 .dial-bg{position:absolute;inset:0}
 #arrow{position:absolute;inset:0;will-change:transform;transition:none}
-#arrowWrap.hide{opacity:.15}
-#nearFace{position:absolute;inset:16%;display:none}
-.dist{font-size:64px;font-weight:900;line-height:1;margin-top:14px;white-space:nowrap}
-.dist small{font-size:30px;margin-left:6px}
-.say{font-size:30px;font-weight:800;margin-top:10px;min-height:40px;color:var(--orange);white-space:nowrap}
-.meta{font-size:15px;color:var(--brown2);margin-top:8px;text-align:center;min-height:20px}
-.row{display:flex;gap:12px;width:100%;max-width:360px}
+#arrowWrap{transition:opacity .3s}
+#arrowWrap.hide{opacity:.12}
+#nearFace{position:absolute;inset:18%;display:none}
+.dist{font-size:60px;font-weight:800;line-height:1;margin-top:22px;white-space:nowrap;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.dist small{font-size:22px;font-weight:600;margin-left:6px;color:var(--ink2);letter-spacing:2px}
+.say{font-size:27px;font-weight:700;margin-top:12px;min-height:38px;color:var(--ac-d);white-space:nowrap;letter-spacing:3px}
+.meta{font-size:13px;color:var(--ink2);margin-top:8px;text-align:center;min-height:18px;letter-spacing:.5px}
+.row{display:flex;gap:12px;width:100%;max-width:350px}
 .row .big-btn{flex:1}
-.status-pill{display:inline-flex;align-items:center;gap:8px;font-size:16px;padding:6px 14px;border-radius:99px;
-  background:var(--cream2);border:2px solid var(--brown2);margin-top:6px}
-.dot{width:10px;height:10px;border-radius:50%;background:#bbb}
-.dot.ok{background:var(--green)} .dot.wait{background:var(--orange)} .dot.bad{background:var(--red)}
-.toggle{display:flex;align-items:center;gap:8px;font-size:17px;margin-top:10px;padding:8px 14px;
-  border-radius:99px;border:2px solid var(--brown2);background:var(--white)}
-.toggle svg{width:24px;height:24px}
-.share-box{width:100%;max-width:360px}
+.status-pill{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:6px 14px;border-radius:99px;
+  background:var(--card);border:1px solid var(--line);margin-top:10px;color:var(--ink2);letter-spacing:1px}
+.dot{width:8px;height:8px;border-radius:50%;background:#bbb}
+.dot.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(127,162,122,.18)}
+.dot.wait{background:var(--ac)} .dot.bad{background:var(--red)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:15px;margin-top:14px;padding:8px 16px;color:var(--ink2);
+  border-radius:99px;border:1px solid var(--line);background:var(--card);letter-spacing:1px}
+.toggle svg{width:22px;height:22px}
+.share-box{width:100%;max-width:350px}
 
 /* 開機畫面 */
-#boot{position:fixed;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;
+#boot{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;
   justify-content:center;z-index:50;transition:opacity .35s}
-#boot .mascot{opacity:0;transform:scale(.6)}
-#boot.go .mascot{animation:pop .6s cubic-bezier(.3,1.6,.5,1) forwards}
-#boot .bt{font-size:34px;font-weight:900;margin-top:10px;opacity:0;letter-spacing:4px}
-#boot.go .bt{animation:fadeup .5s .35s forwards}
+#boot .mascot{opacity:0;transform:scale(.7)}
+#boot.go .mascot{animation:pop .7s cubic-bezier(.3,1.5,.5,1) forwards}
+#boot .bt{font-size:30px;font-weight:800;margin-top:12px;opacity:0;letter-spacing:8px}
+#boot .bs{font-size:12px;letter-spacing:5px;color:var(--ink2);margin-top:6px;opacity:0}
+#boot.go .bt{animation:fadeup .6s .35s forwards}
+#boot.go .bs{animation:fadeup .6s .5s forwards}
 #boot.out{opacity:0;pointer-events:none}
 @keyframes pop{to{opacity:1;transform:scale(1)}}
-@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.bob{animation:bob 2.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.pulse{animation:pulse 1.4s ease-in-out infinite}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bob{animation:bob 2.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.pulse{animation:breathe 1.8s ease-in-out infinite}
 
 /* 視窗 */
-.mask{position:fixed;inset:0;background:rgba(80,50,20,.45);display:none;align-items:center;justify-content:center;z-index:40;padding:20px}
+.mask{position:fixed;inset:0;background:rgba(62,45,36,.35);display:none;align-items:center;justify-content:center;z-index:40;padding:24px}
 .mask.on{display:flex}
-.modal{position:relative;width:100%;max-width:360px;max-height:62vh;overflow:auto;background:var(--white);
-  border:4px solid var(--brown);border-radius:26px;padding:22px 20px 18px}
-.modal h2{margin:0 0 10px;font-size:24px}
-.modal .x{position:absolute;right:10px;top:10px;width:44px;height:44px;border:none;background:none;padding:6px}
-.modal ul{padding-left:20px;font-size:17px;line-height:1.6;margin:6px 0}
-.ver{font-weight:800;margin-top:10px}
-.foot{font-size:13px;color:var(--brown2);margin-top:auto;padding-top:22px;text-align:center}
+.modal{position:relative;width:100%;max-width:350px;max-height:60vh;overflow:auto;background:var(--card);
+  border:1px solid var(--line);border-radius:26px;padding:24px 22px 18px;box-shadow:0 30px 60px -30px rgba(62,45,36,.6)}
+.modal h2{margin:0 0 10px;font-size:22px;letter-spacing:2px}
+.modal .x{position:absolute;right:12px;top:12px;width:40px;height:40px;border:none;background:none;padding:6px}
+.modal ul{padding-left:20px;font-size:16px;line-height:1.7;margin:6px 0;color:var(--ink2)}
+.ver{font-weight:700;margin-top:10px}
+.foot{font-size:12px;color:var(--ink2);margin-top:auto;padding-top:24px;text-align:center;letter-spacing:1px;opacity:.8}
 .toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translateX(-50%);
-  background:var(--brown);color:#fff;font-size:18px;padding:12px 20px;border-radius:99px;opacity:0;
+  background:var(--ink);color:#fff;font-size:16px;padding:12px 20px;border-radius:99px;opacity:0;letter-spacing:1px;
   transition:opacity .25s;z-index:60;white-space:nowrap;pointer-events:none}
 .toast.on{opacity:1}
+
+/* 被擋時的圖解教學 */
+.guide{max-height:80vh;padding:22px 18px 18px}
+.guide h2{font-size:24px;margin:0 0 4px}
+.guide .gsub{font-size:16px;color:var(--ink2);line-height:1.6;margin-bottom:6px}
+.tabs{display:flex;gap:6px;margin:10px 0 4px;background:var(--bg2);border-radius:14px;padding:4px}
+.tabs button{flex:1;border:none;background:none;font-size:15px;padding:9px 0;border-radius:11px;color:var(--ink2);font-family:inherit;font-weight:600}
+.tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px -4px rgba(62,45,36,.4)}
+.step{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
+.step .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--ac);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:17px}
+.step .t{font-size:19px;line-height:1.5;font-weight:600}
+.step .t b{color:var(--ac-d)}
+.mock{margin-top:8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.mrow{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:16px;border-top:1px solid #F0EAE1}
+.mrow:first-child{border-top:none}
+.mrow .ic{width:26px;height:26px;border-radius:7px;flex:none}
+.mrow .r{margin-left:auto;color:var(--ink2);font-size:14px}
+.mrow.hl{background:var(--ac-xl);font-weight:700}
+.sw{width:42px;height:26px;border-radius:99px;background:#65C466;position:relative;margin-left:auto}
+.sw::after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff}
+.gnote{font-size:14px;color:var(--ink2);margin-top:12px;line-height:1.6;background:var(--bg);border-radius:12px;padding:10px 12px}
+.status-pill.tap{border-color:var(--red);color:var(--red)}
 </style>
 </head>
 <body>
@@ -117,6 +154,7 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
 <div id="boot">
   <svg class="mascot" viewBox="0 0 200 200" aria-hidden="true"><use href="#mascotSym"/></svg>
   <div class="bt">來找我</div>
+  <div class="bs">FIND ME</div>
 </div>
 
 <!-- 共用 SVG -->
@@ -124,30 +162,32 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
   <defs>
     <symbol id="mascotSym" viewBox="0 0 200 200">
       <!-- 圓滾滾的定位針小人 -->
-      <ellipse cx="100" cy="186" rx="38" ry="8" fill="#E9CFA6"/>
-      <path d="M100 178 C70 140 42 118 42 82 a58 58 0 0 1 116 0 c0 36 -28 58 -58 96z" fill="#FF8A3D" stroke="#6B4426" stroke-width="6" stroke-linejoin="round"/>
-      <circle cx="100" cy="82" r="38" fill="#FFFDF8" stroke="#6B4426" stroke-width="5"/>
-      <circle cx="86" cy="80" r="5.5" fill="#6B4426"/><circle cx="114" cy="80" r="5.5" fill="#6B4426"/>
+      <ellipse cx="100" cy="186" rx="38" ry="8" fill="#E6DACB"/>
+      <path d="M100 178 C70 140 42 118 42 82 a58 58 0 0 1 116 0 c0 36 -28 58 -58 96z" fill="#B08D57" stroke="#3E2D24" stroke-width="4.5" stroke-linejoin="round"/>
+      <path d="M62 70 a40 40 0 0 1 30 -32" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+      <circle cx="100" cy="82" r="38" fill="#FFFDF9" stroke="#3E2D24" stroke-width="4"/>
+      <circle cx="86" cy="80" r="5.5" fill="#3E2D24"/><circle cx="114" cy="80" r="5.5" fill="#3E2D24"/>
       <circle cx="88" cy="78" r="1.8" fill="#fff"/><circle cx="116" cy="78" r="1.8" fill="#fff"/>
-      <ellipse cx="76" cy="93" rx="7" ry="4.5" fill="#FFB3A7"/><ellipse cx="124" cy="93" rx="7" ry="4.5" fill="#FFB3A7"/>
-      <path d="M92 94 q8 8 16 0" fill="none" stroke="#6B4426" stroke-width="4" stroke-linecap="round"/>
-      <path d="M150 36 l10 -10 M160 52 l14 -2 M140 22 l2 -14" stroke="#6B4426" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="76" cy="93" rx="7" ry="4.5" fill="#F4BFB2"/><ellipse cx="124" cy="93" rx="7" ry="4.5" fill="#F4BFB2"/>
+      <path d="M92 94 q8 8 16 0" fill="none" stroke="#3E2D24" stroke-width="4" stroke-linecap="round"/>
+      <path d="M150 36 l10 -10 M160 52 l14 -2 M140 22 l2 -14" stroke="#3E2D24" stroke-width="4" stroke-linecap="round"/>
     </symbol>
-    <symbol id="icPin" viewBox="0 0 40 40"><path d="M20 37 C12 27 7 22 7 15 a13 13 0 0 1 26 0 c0 7 -5 12 -13 22z" fill="#fff" stroke="#6B4426" stroke-width="3"/><circle cx="20" cy="15" r="5" fill="#FF8A3D" stroke="#6B4426" stroke-width="2.5"/></symbol>
-    <symbol id="icGo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M20 9 L28 27 L20 22 L12 27z" fill="#FF8A3D" stroke="#6B4426" stroke-width="2.5" stroke-linejoin="round"/></symbol>
-    <symbol id="icShare" viewBox="0 0 40 40"><rect x="7" y="16" width="26" height="20" rx="5" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M20 26 V5 M13 11 l7 -7 7 7" fill="none" stroke="#6B4426" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="icCopy" viewBox="0 0 40 40"><rect x="12" y="12" width="21" height="23" rx="5" fill="#fff" stroke="#6B4426" stroke-width="3"/><rect x="6" y="5" width="21" height="23" rx="5" fill="#FFE9C7" stroke="#6B4426" stroke-width="3"/></symbol>
-    <symbol id="icPhone" viewBox="0 0 40 40"><path d="M11 5 l7 2 2 8 -5 3 c2 5 5 8 10 10 l3 -5 8 2 2 7 c-2 4 -6 5 -10 4 C17 33 7 23 5 12 c-1 -4 1 -6 6 -7z" fill="#fff" stroke="#6B4426" stroke-width="3" stroke-linejoin="round"/></symbol>
-    <symbol id="icStop" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#6B4426" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#F0645A" stroke-width="4" stroke-linecap="round"/></symbol>
-    <symbol id="icX" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#FFE9C7" stroke="#6B4426" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#6B4426" stroke-width="4" stroke-linecap="round"/></symbol>
-    <symbol id="icSpk" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#FFE9C7" stroke="#6B4426" stroke-width="3" stroke-linejoin="round"/><path d="M27 14 q5 6 0 12 M31 9 q10 11 0 22" fill="none" stroke="#6B4426" stroke-width="3" stroke-linecap="round"/></symbol>
-    <symbol id="icMute" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#eee" stroke="#9A6B45" stroke-width="3" stroke-linejoin="round"/><path d="M27 15 l10 10 M37 15 l-10 10" stroke="#9A6B45" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="icPin" viewBox="0 0 40 40"><path d="M20 37 C12 27 7 22 7 15 a13 13 0 0 1 26 0 c0 7 -5 12 -13 22z" fill="#fff" stroke="#3E2D24" stroke-width="3"/><circle cx="20" cy="15" r="5" fill="#B08D57" stroke="#3E2D24" stroke-width="2.5"/></symbol>
+    <symbol id="icGo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#3E2D24" stroke-width="3"/><path d="M20 9 L28 27 L20 22 L12 27z" fill="#B08D57" stroke="#3E2D24" stroke-width="2.5" stroke-linejoin="round"/></symbol>
+    <symbol id="icShare" viewBox="0 0 40 40"><rect x="7" y="16" width="26" height="20" rx="5" fill="#fff" stroke="#3E2D24" stroke-width="3"/><path d="M20 26 V5 M13 11 l7 -7 7 7" fill="none" stroke="#3E2D24" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icCopy" viewBox="0 0 40 40"><rect x="12" y="12" width="21" height="23" rx="5" fill="#fff" stroke="#3E2D24" stroke-width="3"/><rect x="6" y="5" width="21" height="23" rx="5" fill="#F4EDE0" stroke="#3E2D24" stroke-width="3"/></symbol>
+    <symbol id="icPhone" viewBox="0 0 40 40"><path d="M11 5 l7 2 2 8 -5 3 c2 5 5 8 10 10 l3 -5 8 2 2 7 c-2 4 -6 5 -10 4 C17 33 7 23 5 12 c-1 -4 1 -6 6 -7z" fill="#fff" stroke="#3E2D24" stroke-width="3" stroke-linejoin="round"/></symbol>
+    <symbol id="icStop" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fff" stroke="#3E2D24" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#D9776B" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="icX" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#F4EDE0" stroke="#3E2D24" stroke-width="3"/><path d="M14 14 l12 12 M26 14 l-12 12" stroke="#3E2D24" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="icSpk" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#F4EDE0" stroke="#3E2D24" stroke-width="3" stroke-linejoin="round"/><path d="M27 14 q5 6 0 12 M31 9 q10 11 0 22" fill="none" stroke="#3E2D24" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="icMute" viewBox="0 0 40 40"><path d="M6 15 h7 l9 -8 v26 l-9 -8 h-7z" fill="#eee" stroke="#8C7666" stroke-width="3" stroke-linejoin="round"/><path d="M27 15 l10 10 M37 15 l-10 10" stroke="#8C7666" stroke-width="3" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
 <!-- 首頁（分享的人） -->
 <section class="screen" id="home">
   <svg class="mascot bob" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
+  <div class="eyebrow">FIND ME</div>
   <h1>來找我</h1>
   <div class="sub">傳一個連結給家人<br>他們跟著<b>大箭頭</b>走，就會走到你身邊</div>
   <div class="card">
@@ -166,7 +206,7 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
   <svg class="mascot bob" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
   <h1 id="welTitle">兒子在等你</h1>
   <div class="sub">按下面的大按鈕<br>然後<b>跟著箭頭走</b>就好</div>
-  <button class="big-btn green pulse" id="btnStart" style="min-height:110px;font-size:34px"><svg style="width:48px;height:48px"><use href="#icGo"/></svg>開始找</button>
+  <button class="big-btn pulse" id="btnStart" style="min-height:104px;font-size:32px"><svg style="width:44px;height:44px"><use href="#icGo"/></svg>開始找</button>
   <div class="card" style="font-size:17px;line-height:1.6">
     手機會問兩次「允許嗎？」<br>都請按 <b>「允許」</b>
   </div>
@@ -187,13 +227,22 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
   <div class="status-pill"><span class="dot wait" id="dot"></span><span id="statusTxt">連線中…</span></div>
   <div class="dial">
     <svg class="dial-bg" viewBox="0 0 300 300">
-      <circle cx="150" cy="150" r="140" fill="#FFFDF8" stroke="#6B4426" stroke-width="7"/>
-      <circle cx="150" cy="150" r="112" fill="none" stroke="#FFE9C7" stroke-width="10" stroke-dasharray="4 14"/>
+      <defs>
+        <radialGradient id="dialFill" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F3ECE2"/></radialGradient>
+      </defs>
+      <circle cx="150" cy="150" r="146" fill="url(#dialFill)" stroke="#E2D6C6" stroke-width="1.5"/>
+      <circle cx="150" cy="150" r="134" fill="none" stroke="#EEE5D8" stroke-width="1"/>
+      <line x1="150" y1="22" x2="150" y2="34" transform="rotate(0 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(10 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(20 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(30 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(40 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(50 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(60 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(70 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(80 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(90 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(100 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(110 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(120 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(130 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(140 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(150 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(160 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(170 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(180 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(190 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(200 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(210 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(220 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(230 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(240 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(250 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(260 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(270 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(280 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(290 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(300 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(310 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(320 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="22" x2="150" y2="34" transform="rotate(330 150 150)" stroke="#C9B9A6" stroke-width="2.4" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(340 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/><line x1="150" y1="26" x2="150" y2="34" transform="rotate(350 150 150)" stroke="#E2D6C6" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="150" cy="150" r="96" fill="none" stroke="#EEE5D8" stroke-width="1" stroke-dasharray="2 6"/>
     </svg>
     <div id="arrowWrap">
       <svg id="arrow" viewBox="0 0 300 300">
-        <path d="M150 34 L224 196 Q228 206 218 204 L150 176 L82 204 Q72 206 76 196 Z" fill="#FF8A3D" stroke="#6B4426" stroke-width="8" stroke-linejoin="round"/>
-        <path d="M150 64 L196 168 L150 150z" fill="#FFB27A"/>
+        <defs>
+          <linearGradient id="arrowFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCC596"/><stop offset="1" stop-color="#86683A"/></linearGradient>
+        </defs>
+        <path d="M150 46 L218 192 Q222 202 212 199 L150 174 L88 199 Q78 202 82 192 Z" fill="url(#arrowFill)" stroke="#3E2D24" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M150 64 L150 170 L94 192z" fill="#FFFFFF" opacity=".22"/>
+        <circle cx="150" cy="150" r="6" fill="#FFFDF9" stroke="#3E2D24" stroke-width="3"/>
       </svg>
     </div>
     <svg id="nearFace" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
@@ -207,7 +256,7 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
     <button class="big-btn white small" id="btnCopy"><svg><use href="#icCopy"/></svg>複製連結</button>
   </div>
   <div class="row" style="margin-top:4px">
-    <a class="big-btn green small" id="btnCall" href="#" style="text-decoration:none;display:none"><svg><use href="#icPhone"/></svg><span id="callTxt">打電話</span></a>
+    <a class="big-btn dark small" id="btnCall" href="#" style="text-decoration:none;display:none"><svg><use href="#icPhone"/></svg><span id="callTxt">打電話</span></a>
     <button class="big-btn white small" id="btnEnd"><svg><use href="#icStop"/></svg>結束</button>
   </div>
   <button class="toggle" id="btnVoice"><svg id="voiceIc"><use href="#icSpk"/></svg><span id="voiceTxt">語音提示：開</span></button>
@@ -219,6 +268,19 @@ h1{font-size:34px;margin:10px 0 4px;white-space:nowrap;letter-spacing:2px}
     <button class="x" id="newsX" aria-label="關閉"><svg><use href="#icX"/></svg></button>
     <h2>更新說明</h2>
     <div id="newsBody"></div>
+  </div>
+</div>
+<!-- 被擋時的圖解教學 -->
+<div class="mask" id="guideMask">
+  <div class="modal guide">
+    <button class="x" id="guideX" aria-label="關閉"><svg><use href="#icX"/></svg></button>
+    <h2 id="gTitle">位置被關掉了</h2>
+    <div class="gsub" id="gSub">照下面做一次，以後就不用再設定</div>
+    <div class="tabs" id="gTabs">
+      <button data-os="ios">iPhone</button><button data-os="android">Android</button>
+    </div>
+    <div id="gBody"></div>
+    <button class="big-btn small" id="gRetry" style="max-width:none">我改好了，再試一次</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -256,6 +318,7 @@ let lastWrite = 0, watchId = null, unsub = null;
 let voiceOn = true, lastSpeak = 0, lastSaid = '', arrived = false;
 let audioCtx = null, wakeLock = null, busy = false;
 let otherName = '對方';
+let gpsErr = null;
 
 const ls = {
   get(k, d=null){ try{ const v = localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch(e){ return d; } },
@@ -325,7 +388,7 @@ async function askCompass(){
   try{
     if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
       const r = await DeviceOrientationEvent.requestPermission();
-      if(r!=='granted'){ toast('沒有開羅盤，箭頭會不準'); return; }
+      if(r!=='granted'){ openGuide('compass'); return; }
     }
   }catch(e){}
   const handler = e=>{
@@ -345,11 +408,14 @@ async function askCompass(){
 function startGPS(){
   if(!('geolocation' in navigator)){ setStatus('bad','這支手機不支援定位'); return; }
   watchId = navigator.geolocation.watchPosition(p=>{
+    gpsErr = null;
     me = {lat:p.coords.latitude, lng:p.coords.longitude, acc:Math.round(p.coords.accuracy||0), t:Date.now()};
     pushMe();
   }, err=>{
-    if(err.code===1) setStatus('bad','沒有允許定位，請到設定打開');
-    else setStatus('wait','找不到 GPS 訊號，請到戶外');
+    gpsErr = err.code;
+    if(err.code===1){ setStatus('bad','定位被關掉了，點這裡看怎麼開'); openGuide('loc'); }
+    else if(err.code===3) setStatus('wait','GPS 訊號弱，請到戶外');
+    else { setStatus('bad','拿不到位置，點這裡看怎麼開'); openGuide('loc'); }
   }, {enableHighAccuracy:true, maximumAge:1000, timeout:20000});
 }
 async function keepAwake(){
@@ -385,14 +451,15 @@ function listenOther(){
 }
 
 // ===== 畫面更新迴圈 =====
-function setStatus(cls, txt){ $('dot').className='dot '+cls; $('statusTxt').textContent=txt; }
+function setStatus(cls, txt){ $('dot').className='dot '+cls; $('statusTxt').textContent=txt;
+  document.querySelector('#find .status-pill').classList.toggle('tap', cls==='bad' && (gpsErr===1||gpsErr===2)); }
 function tick(){
   requestAnimationFrame(tick);
   if(!$('find').classList.contains('on')) return;
   const now=Date.now();
   if(role==='a' && now-roomCreated>ROOM_TTL){ endRoom(); show('expired'); return; }
 
-  if(!me){ setStatus('wait','正在找你的位置…'); $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=''; return; }
+  if(!me){ $('arrowWrap').classList.add('hide'); if(gpsErr===null) setStatus('wait','正在找你的位置…'); $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=''; return; }
   if(!other){
     setStatus('wait', role==='a' ? `等${otherName}打開連結…` : `等${otherName}的位置…`);
     $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=`你的 GPS 誤差約 ${me.acc} 公尺`;
@@ -462,7 +529,7 @@ async function startAsSharer(resume){
   $('shareBox').style.display='';
   $('btnCall').style.display='none';
   show('find');
-  await askCompass(); startGPS(); keepAwake();
+  startGPS(); askCompass(); keepAwake();
   if(await initDb()){ listenOther(); pushMe(); }
   busy=false;
 }
@@ -471,7 +538,7 @@ async function startAsFinder(){
   initAudio(); speak('',true);
   role='b'; show('find');
   $('shareBox').style.display='none';
-  await askCompass(); startGPS(); keepAwake();
+  startGPS(); askCompass(); keepAwake();
   if(await initDb()){ listenOther(); pushMe(); }
   speak(`跟著箭頭走，就會找到${otherName}`, true);
   busy=false;
@@ -521,6 +588,75 @@ function renderVoice(){
   $('voiceTxt').textContent='語音提示：'+(voiceOn?'開':'關');
   $('voiceIc').innerHTML=`<use href="#${voiceOn?'icSpk':'icMute'}"/>`;
 }
+
+
+// ===== 被擋時的圖解教學 =====
+const UA = navigator.userAgent || '';
+const ENV = {
+  os: /iPhone|iPad|iPod/.test(UA) ? 'ios' : (/Android/.test(UA) ? 'android' : 'ios'),
+  br: /Line\//i.test(UA) ? 'line' : /CriOS/.test(UA) ? 'chrome' : /FxiOS/.test(UA) ? 'firefox'
+      : /SamsungBrowser/.test(UA) ? 'samsung' : /Android/.test(UA) ? 'chrome' : 'safari'
+};
+let guideKind = null, guideOs = ENV.os, compassPending = false;
+const icon = c=>`<span class="ic" style="background:${c}"></span>`;
+function stepsHtml(kind, os){
+  const st=(n,t,mock='')=>`<div class="step"><div class="n">${n}</div><div style="flex:1"><div class="t">${t}</div>${mock}</div></div>`;
+  if(kind==='line'){
+    return st(1,'點右下角的 <b>⋯</b>（或右上角）')
+         + st(2, os==='ios' ? '選 <b>「以 Safari 開啟」</b>' : '選 <b>「以其他應用程式開啟」</b> → Chrome')
+         + st(3,'在新打開的網頁按 <b>「開始找」</b>');
+  }
+  if(kind==='compass'){
+    return os==='ios'
+      ? st(1,'把這個網頁<b>關掉</b>') + st(2,'回到 LINE <b>再點一次連結</b>') + st(3,'問「動作與方向」時按 <b>「允許」</b>')
+        + '<div class="gnote">沒開羅盤也能用：距離照樣會顯示，只是箭頭不會跟著你轉。</div>'
+      : st(1,'Android 不用另外允許羅盤') + st(2,'把手機<b>拿平</b>，在空中畫 8 字校正')
+        + '<div class="gnote">箭頭亂轉通常是羅盤沒校正，畫幾次 8 字就會好。</div>';
+  }
+  // 定位
+  if(os==='ios'){
+    const app = ENV.br==='chrome' ? 'Chrome' : ENV.br==='firefox' ? 'Firefox' : 'Safari 網站';
+    return st(1,'打開手機的 <b>「設定」</b>', `<div class="mock"><div class="mrow">${icon('#8E8E93')}設定</div></div>`)
+      + st(2,'點 <b>「隱私權與安全性」</b> → <b>「定位服務」</b>，最上面的開關要<b>打開</b>',
+          `<div class="mock"><div class="mrow">${icon('#3478F6')}隱私權與安全性<span class="r">›</span></div><div class="mrow hl">${icon('#3478F6')}定位服務<span class="sw"></span></div></div>`)
+      + st(3,`往下找 <b>「${app}」</b>，改成 <b>「使用 App 期間」</b>`,
+          `<div class="mock"><div class="mrow hl">${icon(ENV.br==='chrome'?'#34A853':'#3478F6')}${app}<span class="r">使用 App 期間 ›</span></div></div>`)
+      + st(4,'回到這裡，按下面的 <b>「再試一次」</b>')
+      + `<div class="gnote">如果還是不行：點網址列左邊的「<b>大小</b>」圖示 →「網站設定」→「位置」→ 選「<b>允許</b>」。</div>`;
+  }
+  return st(1,'從螢幕最上面<b>往下滑</b>，打開 <b>「定位」</b>（或「位置」）',
+        `<div class="mock"><div class="mrow hl">${icon('#3478F6')}定位<span class="sw"></span></div></div>`)
+    + st(2,'點網址列左邊的 <b>小圖示</b> → <b>「權限」</b> → <b>「位置」</b>',
+        `<div class="mock"><div class="mrow">${icon('#5F6368')}權限<span class="r">›</span></div><div class="mrow hl">${icon('#5F6368')}位置<span class="r">允許</span></div></div>`)
+    + st(3,'改成 <b>「允許」</b>，再按下面的 <b>「再試一次」</b>');
+}
+function renderGuide(){
+  const t={loc:['位置被關掉了','照下面做一次，以後就不用再設定'],
+           compass:['羅盤沒有打開','箭頭會不準，照下面做就好'],
+           line:['請改用瀏覽器打開','LINE 裡面沒辦法用定位']}[guideKind];
+  $('gTitle').textContent=t[0]; $('gSub').textContent=t[1];
+  $('gTabs').style.display = guideKind==='line' ? 'none' : '';
+  $('gTabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.os===guideOs));
+  $('gBody').innerHTML = stepsHtml(guideKind, guideOs);
+  $('gRetry').style.display = guideKind==='loc' ? '' : 'none';
+}
+function openGuide(kind){
+  // 定位教學優先：定位有問題時，不讓羅盤教學蓋掉它
+  if(kind==='compass' && (gpsErr===1||gpsErr===2||($('guideMask').classList.contains('on') && guideKind==='loc'))){ compassPending=true; return; }
+  guideKind=kind; guideOs=ENV.os; renderGuide();
+  $('guideMask').classList.add('on'); document.body.style.overflow='hidden';
+  if(kind==='loc') speak('位置被關掉了，請照畫面上的步驟打開', true);
+}
+function closeGuide(){ $('guideMask').classList.remove('on'); document.body.style.overflow='';
+  if(guideKind==='loc' && compassPending && gpsErr===null){ compassPending=false; setTimeout(()=>openGuide('compass'),400); } }
+$('guideX').addEventListener('click', closeGuide);
+$('guideMask').addEventListener('click', e=>{ if(e.target===$('guideMask')) closeGuide(); });
+$('gTabs').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; guideOs=b.dataset.os; renderGuide(); });
+$('gRetry').addEventListener('click', ()=>{
+  navigator.geolocation.getCurrentPosition(()=>{ closeGuide(); gpsErr=null; toast('成功拿到位置了'); if(watchId!==null) navigator.geolocation.clearWatch(watchId); startGPS(); },
+    ()=>{ location.reload(); }, {enableHighAccuracy:true, timeout:10000});
+});
+document.querySelector('#find .status-pill').addEventListener('click', ()=>{ if(gpsErr===1||gpsErr===2) openGuide('loc'); });
 
 // ===== 自動更新 =====
 function cmpVer(a,b){ const x=a.split('.').map(Number), y=b.split('.').map(Number); for(let i=0;i<3;i++){ if((x[i]||0)!==(y[i]||0)) return (x[i]||0)-(y[i]||0); } return 0; }
@@ -576,7 +712,9 @@ function route(){
     $('findTitle').textContent = `跟著箭頭找${otherName}`;
     const p=(q.get('p')||'').replace(/[^\d+]/g,'');
     if(p){ $('btnCall').href='tel:'+p; $('btnCall').style.display=''; $('callTxt').textContent='打給'+otherName; }
-    show('welcome'); return;
+    show('welcome');
+    if(ENV.br==='line') setTimeout(()=>openGuide('line'), 2800);
+    return;
   }
   const saved = ls.get('fm_room', null);
   if(saved && saved.id && Date.now()-saved.c < ROOM_TTL){
