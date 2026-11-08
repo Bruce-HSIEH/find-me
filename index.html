@@ -250,7 +250,7 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
   <svg class="mascot bob" viewBox="0 0 200 200"><use href="#mascotSym"/></svg>
   <div class="eyebrow">FIND ME</div>
   <h1>來找我</h1>
-  <div class="sub">傳一個連結給家人<br>他們跟著<b>大箭頭</b>走，就會走到你身邊</div>
+  <div class="sub">傳一個連結給家人朋友<br>他們跟著<b>大箭頭</b>走，就會走到你身邊</div>
   <div class="card">
     <label for="myName">對方要怎麼叫你？</label>
     <input id="myName" maxlength="8" placeholder="例如：兒子">
@@ -375,8 +375,13 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 
 <script type="module">
 // ===== 版本與改版紀錄 =====
-const APP_VERSION = '2.0.0';
+const APP_VERSION = '2.0.1';
 const CHANGELOG = [
+  { v:'2.0.1', items:[
+    '標題會依照連上的人數改變，例如「媽媽會跟著箭頭找你」',
+    '有人連上時會叮咚一聲並提醒你是誰',
+    '文字微調：傳連結給家人朋友'
+  ]},
   { v:'2.0.0', items:[
     '可以同時分享給很多人：每個人打開同一個連結就好',
     '沒填名字的人會自動用水果命名，地圖上也是那顆水果',
@@ -433,6 +438,7 @@ let modeLabel = '', lastAuto = null;   // 'route' | 'fallback'
 const FRUITS=[['蘋果','#D9534F'],['香蕉','#E2B93B'],['葡萄','#8E5BA8'],['草莓','#E86A8A'],['西瓜','#5FA55A'],['芒果','#F0A030'],
   ['藍莓','#4A6FB5'],['奇異果','#8DB04A'],['水蜜桃','#F09A86'],['檸檬','#CFC23A'],['櫻桃','#B8324A'],['哈密瓜','#6FB8A0']];
 let fbAuth=null, myUid=null, hostUid=null, shareAll=false, people={}, targetUid=null, targetManual=false;
+const knownJoin=new Set(); let joinReady=false;
 let hostLabel='對方', lastTarget=null, myPhone='';
 let myName='', peopleUnsub=null, metaUnsub=null, roomEnded=false, chipSig='';
 const FRUIT_SVG=[
@@ -799,7 +805,7 @@ function tick(){
 
   if(!me){ $('arrowWrap').classList.add('hide'); if(gpsErr===null) setStatus('wait','正在找你的位置…'); $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=''; return; }
   if(!other){
-    setStatus('wait', role==='a' ? (others().length ? `等${otherName}的位置…` : '等大家打開連結…') : `等${otherName}的位置…`);
+    setStatus('wait', role==='a' ? (others().length ? `等${otherName}的位置…` : '還沒有人打開連結') : `等${otherName}的位置…`);
     $('dist').innerHTML='--'; $('say').textContent=''; $('meta').textContent=`你的 GPS 誤差約 ${me.acc} 公尺`;
     $('arrowWrap').classList.add('hide');
     if(viewMode==='map' && now-lastMapUpd>500){ lastMapUpd=now; updateMap(false); }
@@ -874,7 +880,13 @@ function pickTarget(){
   const P = targetUid && people[targetUid];
   other = (P && typeof P.lat==='number') ? P : null;
   otherName = targetUid ? nameOf(targetUid) : (role==='b' ? hostLabel : '對方');
-  $('findTitle').textContent = role==='a' ? (others().length>1 ? `跟著箭頭找${otherName}` : '大家會跟著箭頭找你') : `跟著箭頭找${otherName}`;
+  if(role==='a'){
+    const os=others(), n=os.length;
+    $('findTitle').textContent = n===0 ? '連結準備好了' : n===1 ? `${nameOf(os[0])}會跟著箭頭找你` : '大家會跟著箭頭找你';
+    // 有人新連上：叮一聲＋小提示
+    for(const u of os) if(!knownJoin.has(u)){ knownJoin.add(u); if(joinReady){ ding([660,990]); toast(`${nameOf(u)}連上了`); speak(`${nameOf(u)}連上了`, true); } }
+    joinReady = true;
+  }else $('findTitle').textContent = `跟著箭頭找${otherName}`;
 }
 function renderChips(){
   let ids = others();
