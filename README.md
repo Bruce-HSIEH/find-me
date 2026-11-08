@@ -15,16 +15,25 @@
 - 房間碼是 24 碼亂數，1 小時後失效
 - 箭頭方向 = 對方方位角 − 手機羅盤朝向（iPhone 用 `webkitCompassHeading`）
 
-## Firebase 安全規則
+## Firebase 安全規則（v2.0.0 起，需開啟匿名登入）
+資料結構：`rooms/<房間>/meta = {host, c, share}`、`rooms/<房間>/p/<uid> = {n, f, lat, lng, acc, t}`
 ```json
 {
   "rules": {
     "rooms": {
       "$room": {
-        ".read": "$room.length >= 20",
-        "$who": {
-          ".write": "$room.length >= 20",
-          ".validate": "!newData.exists() || (newData.child('lat').isNumber() && newData.child('lng').isNumber() && newData.child('t').isNumber())"
+        "meta": {
+          ".read": "auth != null",
+          ".write": "auth != null && $room.length >= 20 && (data.exists() ? data.child('host').val() === auth.uid : newData.child('host').val() === auth.uid)"
+        },
+        "p": {
+          ".read": "auth != null && (root.child('rooms').child($room).child('meta/host').val() === auth.uid || root.child('rooms').child($room).child('meta/share').val() === true)",
+          ".write": "auth != null && !newData.exists() && root.child('rooms').child($room).child('meta/host').val() === auth.uid",
+          "$uid": {
+            ".read": "auth != null && ($uid === auth.uid || $uid === root.child('rooms').child($room).child('meta/host').val())",
+            ".write": "auth != null && $uid === auth.uid && root.child('rooms').child($room).child('meta').exists()",
+            ".validate": "!newData.exists() || (newData.child('lat').isNumber() && newData.child('lng').isNumber() && newData.child('t').isNumber())"
+          }
         }
       }
     }
