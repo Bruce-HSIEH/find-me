@@ -63,6 +63,10 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
   background:#fff;color:var(--ink);font-family:inherit;user-select:text;-webkit-user-select:text;outline:none}
 .card input:focus{border-color:var(--ac)}
 .card input::placeholder{color:#C2B3A4}
+.allow-tip{display:flex;align-items:center;gap:12px;width:100%;max-width:350px;margin-top:16px;padding:12px 16px;border-radius:18px;
+  background:var(--ac-xl);border:1px solid var(--ac-l);font-size:15.5px;line-height:1.6;color:var(--ink)}
+.allow-tip svg{width:30px;height:30px;flex:none}
+.allow-tip b{color:var(--ac-d)}
 .hint{font-size:14px;color:var(--ink2);margin-top:12px;line-height:1.5;letter-spacing:.5px}
 .mascot{width:170px;height:170px}
 
@@ -137,7 +141,8 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 .asub{font-size:20px;line-height:1.6;color:var(--ink2);margin-top:8px;letter-spacing:1px}
 .asub b{color:var(--ac-d)}
 .automodal .big-btn{margin-top:22px;min-height:66px;font-size:23px}
-.toggle small.tmp{display:block;font-size:12px;letter-spacing:1px;margin-top:1px;color:var(--ac-d)}
+.toggle small.tmp{display:block;font-size:11.5px;letter-spacing:.5px;margin-top:2px;color:#AD9A8A;font-weight:400}
+.toggle.warn small.tmp{color:var(--ac-d)}
 #routeTxt{line-height:1.2;text-align:left}
 .toggle.warn{border-color:var(--ac);color:var(--ac-d);background:var(--ac-xl)}
 
@@ -225,7 +230,8 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
     <label for="myPhone">你的手機號碼（選填）</label>
     <input id="myPhone" type="tel" inputmode="tel" maxlength="15" placeholder="對方畫面會有「打給你」按鈕">
   </div>
-  <button class="big-btn" id="btnCreate"><svg><use href="#icPin"/></svg>開始分享位置</button>
+  <div class="allow-tip"><svg viewBox="0 0 40 40"><use href="#icPin"/></svg><div>按下去後手機會問 <b>2 次</b>「允許嗎？」<br>都請按 <b>「允許」</b></div></div>
+  <button class="big-btn" id="btnCreate" style="margin-top:12px"><svg><use href="#icPin"/></svg>開始分享位置</button>
   <div class="hint" style="max-width:360px;text-align:center">連結 1 小時後失效，按「結束」就刪除位置</div>
   <div class="foot">Copyright © 2026 大樹<br><button class="vlink"><span class="vtxt"></span></button></div>
 </section>
@@ -290,7 +296,7 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
   </div>
   <button class="big-btn white small" id="btnEnd" style="max-width:350px"><svg><use href="#icStop"/></svg>結束</button>
   <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-  <button class="toggle" id="btnRoute"><svg id="routeIc"><use href="#icRoute"/></svg><span id="routeTxt">沿步道走</span></button>
+  <button class="toggle" id="btnRoute"><svg id="routeIc"><use href="#icRoute"/></svg><span id="routeTxt">照著路走</span></button>
   <button class="toggle" id="btnVoice"><svg id="voiceIc"><use href="#icSpk"/></svg><span id="voiceTxt">語音提示：開</span></button>
   </div>
 </section>
@@ -320,7 +326,7 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 <div class="mask" id="autoMask">
   <div class="modal automodal">
     <div class="abadge"><svg id="aIcon" viewBox="0 0 40 40"><use href="#icLineDir"/></svg></div>
-    <h2 id="nTitle">查不到步道路線</h2>
+    <h2 id="nTitle">找不到可以走的路</h2>
     <div class="asub" id="nSub">先改用直線方向</div>
     <button class="big-btn" id="aOk">知道了</button>
   </div>
@@ -329,12 +335,16 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
 
 <script type="module">
 // ===== 版本與改版紀錄 =====
-const APP_VERSION = '1.1.0';
+const APP_VERSION = '1.1.1';
 const CHANGELOG = [
+  { v:'1.1.1', items:[
+    '「沿步道走」改名為「照著路走」，按鈕下面多一行小字說明',
+    '分享位置前，提醒手機會問 2 次「允許」'
+  ]},
   { v:'1.1.0', items:[
     '新的香檳金外觀，畫面更精緻',
-    '新增「沿步道走」：箭頭會沿著步道帶路，遇到河或圍牆會繞過去',
-    '查不到步道時，自動改用直線方向，並跳出大視窗提醒',
+    '新增「照著路走」：箭頭會沿著路帶你走，遇到河或圍牆會繞過去',
+    '找不到路時，自動改用直線方向，並跳出大視窗提醒',
     '新增「用 LINE 打」按鈕，不用填電話也能打過去',
     '定位或羅盤沒開時，會跳出圖解教學，iPhone、Android 都有',
     '分享連結改成 1 小時後失效',
@@ -528,7 +538,7 @@ async function fetchRoute(a, b){
     const j = await r.json();
     if(j.code!=='Ok' || !j.routes || !j.routes[0]) throw new Error('沒有路線');
     const w = j.waypoints||[];
-    if(w.some(x=>x.distance>SNAP_MAX_M)) throw new Error('附近步道資料不足');
+    if(w.some(x=>x.distance>SNAP_MAX_M)) throw new Error('附近地圖沒有路的資料');
     const rt = j.routes[0], straight = distM(a,b);
     if(straight<400 && rt.distance>straight*4) throw new Error('路線繞太遠，可能資料不準');
     const pts = rt.geometry.coordinates.map(c=>({lng:c[0], lat:c[1]}));
@@ -568,7 +578,9 @@ function maybeReroute(d){
 }
 function renderRouteBtn(){
   const auto = routeMode && lastAuto==='fallback';
-  $('routeTxt').innerHTML = (!routeMode || auto) ? '直線方向' + (auto ? '<small class="tmp">（暫時用）</small>' : '') : '沿步道走';
+  $('routeTxt').innerHTML = (!routeMode || auto)
+    ? '直線方向<small class="tmp">' + (auto ? '找不到路，暫時用' : '直接指向對方') + '</small>'
+    : '照著路走<small class="tmp">會繞過河、圍牆</small>';
   $('btnRoute').classList.toggle('warn', auto);
   $('routeIc').innerHTML = `<use href="#${(routeMode&&!auto)?'icRoute':'icLineDir'}"/>`;
 }
@@ -617,12 +629,12 @@ function tick(){
       const st = onRoute ? 'route' : (routeNote ? 'fallback' : null);
       if(st && st!==lastAuto){
         const prev = lastAuto; lastAuto = st;
-        if(st==='fallback'){ notice('查不到步道路線', `先改用<b>直線方向</b><br>跟著箭頭走就好`, 'icLineDir'); speak('找不到步道路線，先改用直線方向', true); }
-        else if(prev==='fallback'){ notice('找到步道路線了', `改回<b>沿步道走</b><br>跟著箭頭走就好`, 'icRoute'); speak('找到步道路線了，改回沿步道走', true); }
+        if(st==='fallback'){ notice('找不到可以走的路', `先改用<b>直線方向</b><br>箭頭會直接指向對方`, 'icLineDir'); speak('找不到可以走的路，先改成箭頭直接指向對方', true); }
+        else if(prev==='fallback'){ notice('找到可以走的路了', `改回<b>照著路走</b><br>箭頭會帶你繞過河和圍牆`, 'icRoute'); speak('找到可以走的路了，跟著箭頭走就好', true); }
         renderRouteBtn();
       }
     }
-    modeLabel = !routeMode ? '直線方向' : onRoute ? '沿步道走' : d<=ROUTE_STRAIGHT_M ? '很近了，用直線' : (routeNote || (routing ? '正在查路線…' : '直線方向'));
+    modeLabel = !routeMode ? '直線方向' : onRoute ? '照著路走' : d<=ROUTE_STRAIGHT_M ? '很近了，用直線' : (routeNote || (routing ? '正在查路線…' : '直線方向'));
     const f=fmtDist(showD); $('dist').innerHTML=`${f.n}<small>${f.u}</small>`;
     const b = bearing(me, tgt);
     if(heading===null){
@@ -724,7 +736,7 @@ function confirmEnd(){ return true; }
 $('btnRoute').addEventListener('click', ()=>{
   routeMode=!routeMode; ls.set('fm_route', routeMode); renderRouteBtn();
   routeFailUntil=0; lastRouteReq=0; routeNote=''; lastAuto=null;
-  toast(routeMode ? '改成沿步道走' : '改成直線方向');
+  toast(routeMode ? '改成照著路走' : '改成直線方向');
 });
 $('btnVoice').addEventListener('click', ()=>{
   voiceOn=!voiceOn; ls.set('fm_voice', voiceOn); renderVoice();
