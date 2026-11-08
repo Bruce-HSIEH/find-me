@@ -159,6 +159,13 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
   background:var(--ink);color:#fff;font-size:16px;padding:12px 20px;border-radius:99px;opacity:0;letter-spacing:1px;
   transition:opacity .25s;z-index:60;white-space:nowrap;pointer-events:none}
 .toast.on{opacity:1}
+.joincard{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translate(-50%,-160%);width:calc(100% - 40px);max-width:350px;
+  display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px 16px;
+  box-shadow:0 20px 44px -18px rgba(62,45,36,.6);z-index:70;transition:transform .5s cubic-bezier(.2,1.25,.4,1)}
+.joincard.on{transform:translate(-50%,0)}
+.joincard svg{width:44px;height:44px;flex:none;background:var(--bg);border-radius:50%;padding:6px;border:1px solid var(--line);box-sizing:border-box}
+.joincard b{display:block;font-size:19px;letter-spacing:1px}
+.joincard span{display:block;font-size:14px;color:var(--ink2);margin-top:2px;letter-spacing:1px}
 .automodal{text-align:center;padding:30px 24px 22px;max-width:330px}
 .abadge{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;background:var(--ac-xl);border:1.5px solid var(--ac-l);
   display:flex;align-items:center;justify-content:center}
@@ -371,12 +378,17 @@ h1{font-size:32px;font-weight:800;margin:14px 0 2px;white-space:nowrap;letter-sp
     <button class="big-btn" id="aOk">知道了</button>
   </div>
 </div>
+<div class="joincard" id="joinCard"><svg id="jcFruit" viewBox="0 0 20 20"></svg><div><b id="jcTitle"></b><span id="jcSub"></span></div></div>
 <div class="toast" id="toast"></div>
 
 <script type="module">
 // ===== 版本與改版紀錄 =====
-const APP_VERSION = '2.0.1';
+const APP_VERSION = '2.0.2';
 const CHANGELOG = [
+  { v:'2.0.2', items:[
+    '有人連上時，上方會滑下卡片，顯示他的水果和「現在有幾人在線上」',
+    '超過 2 分鐘沒更新位置的人，會自動不算在線上'
+  ]},
   { v:'2.0.1', items:[
     '標題會依照連上的人數改變，例如「媽媽會跟著箭頭找你」',
     '有人連上時會叮咚一聲並提醒你是誰',
@@ -459,7 +471,8 @@ function fruitOf(uid){ let h=7; for(const c of String(uid)) h=(h*31+c.charCodeAt
 function nameOf(uid){ const p=people[uid]; if(uid===hostUid && role==='b' && (!p || !(p.n||'').trim())) return hostLabel; if(!p) return '對方'; return (p.n||'').trim() || FRUITS[p.f??fruitOf(uid)][0]; }
 function fruitIdx(uid){ const p=people[uid]; return (p&&p.f!=null)?p.f:fruitOf(uid); }
 function colorOf(uid){ const p=people[uid]; return FRUITS[(p&&p.f!=null)?p.f:fruitOf(uid)][1]; }
-function others(){ return Object.keys(people).filter(u=>u!==myUid && people[u] && typeof people[u].lat==='number'); }
+const ONLINE_MS = 2*60*1000;   // 超過 2 分鐘沒更新位置 → 不算在線上
+function others(){ const now=Date.now(); return Object.keys(people).filter(u=>u!==myUid && people[u] && typeof people[u].lat==='number' && now-(people[u].t||0) < ONLINE_MS); }
 
 const ls = {
   get(k, d=null){ try{ const v = localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch(e){ return d; } },
@@ -813,7 +826,7 @@ function tick(){
   }
   const age = now-other.t;
   if(age>STALE_MS) setStatus('bad', `${otherName}的位置 ${Math.round(age/1000)} 秒沒更新`);
-  else { const n=others().length; setStatus('ok', n>1 ? `已連上 ${n} 人` : `已連上${otherName}`); }
+  else { const n=others().length; setStatus('ok', n>1 ? `${n} 人在線上` : `已連上${otherName}`); }
   if(role==='a'){ $('btnCopy').style.display='none'; $('shareTxt').textContent='再傳給其他人'; $('btnShare').classList.add('white','small'); }
   $('btnCall').style.display = (role==='b' && targetUid===hostUid && myPhone) ? '' : 'none';
 
@@ -884,10 +897,18 @@ function pickTarget(){
     const os=others(), n=os.length;
     $('findTitle').textContent = n===0 ? '連結準備好了' : n===1 ? `${nameOf(os[0])}會跟著箭頭找你` : '大家會跟著箭頭找你';
     // 有人新連上：叮一聲＋小提示
-    for(const u of os) if(!knownJoin.has(u)){ knownJoin.add(u); if(joinReady){ ding([660,990]); toast(`${nameOf(u)}連上了`); speak(`${nameOf(u)}連上了`, true); } }
+    for(const u of os) if(!knownJoin.has(u)){ knownJoin.add(u); if(joinReady){ ding([660,990]); joinCard(u, os.length); speak(`${nameOf(u)}連上了`, true); } }
     joinReady = true;
   }else $('findTitle').textContent = `跟著箭頭找${otherName}`;
 }
+function joinCard(u, n){
+  $('jcFruit').innerHTML = FRUIT_SVG[fruitIdx(u)];
+  $('jcTitle').textContent = `${nameOf(u)}連上了`;
+  $('jcSub').textContent = n>1 ? `現在有 ${n} 人在線上` : '他會跟著箭頭找你';
+  $('joinCard').classList.add('on'); clearTimeout(joinCard._t);
+  joinCard._t = setTimeout(()=>$('joinCard').classList.remove('on'), 4000);
+}
+$('joinCard').addEventListener('click', ()=>$('joinCard').classList.remove('on'));
 function renderChips(){
   let ids = others();
   if(role==='b' && hostUid){ ids = [hostUid, ...ids.filter(u=>u!==hostUid)]; }
