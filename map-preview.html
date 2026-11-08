@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>來找我・地圖預覽</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+html,body{margin:0;height:100%;background:#F7F2EA;font-family:-apple-system,"PingFang TC",sans-serif;color:#3E2D24}
+body{display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + 16px) 20px 20px;box-sizing:border-box}
+h1{font-size:20px;letter-spacing:3px;margin:4px 0}
+p{font-size:14px;color:#8C7666;margin:0 0 12px;text-align:center;line-height:1.6}
+.box{position:relative;width:100%;max-width:350px;height:62vh;border-radius:26px;overflow:hidden;border:1px solid #E2D6C6;box-shadow:0 24px 50px -28px rgba(62,45,36,.55)}
+#map{position:absolute;inset:0;width:100%;height:100%}
+.mk{display:flex;flex-direction:column;align-items:center}
+.mk svg{width:44px;height:44px;filter:drop-shadow(0 4px 4px rgba(62,45,36,.25))}
+.mk b{margin-top:-2px;font-size:12px;background:#FFFDF9;border:1px solid #E2D6C6;border-radius:99px;padding:1px 8px;letter-spacing:1px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{border:1px solid #E2D6C6;background:#FFFDF9;border-radius:99px;padding:7px 14px;font-size:14px;color:#3E2D24;font-family:inherit}
+.tabs button.on{background:#B08D57;color:#fff;border-color:#B08D57}
+</style></head><body>
+<h1>地圖預覽</h1>
+<p>木柵動物園附近，標記與路線都是示範用的假資料<br>可以拖動、縮放看看配色</p>
+<div class="tabs"><button class="on" data-s="mine">我們的配色</button><button data-s="orig">原始樣式</button></div>
+<div class="box"><div id="map"></div></div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+let map;
+function restyle(){
+  const C={bg:'#F7F2EA', water:'#DCE5E8', park:'#E6EADB', bld:'#EFE5D8', road:'#FFFFFF', casing:'#E2D6C6', label:'#8C7666', major:'#F3E6CF'};
+  for(const l of map.getStyle().layers){
+    const id=l.id, t=l.type;
+    try{
+      if(t==='background') map.setPaintProperty(id,'background-color',C.bg);
+      else if(t==='fill'){
+        if(/water/.test(id)) map.setPaintProperty(id,'fill-color',C.water);
+        else if(/park|wood|grass|landcover|landuse/.test(id)) map.setPaintProperty(id,'fill-color',C.park);
+        else if(/building/.test(id)) map.setPaintProperty(id,'fill-color',C.bld);
+      }else if(t==='line'){
+        if(/water|river/.test(id)) map.setPaintProperty(id,'line-color',C.water);
+        else if(/casing/.test(id)) map.setPaintProperty(id,'line-color',C.casing);
+        else if(/motorway|trunk|primary/.test(id)) map.setPaintProperty(id,'line-color',C.major);
+        else if(/road|highway|path|street|minor|service|track|bridge|tunnel/.test(id)) map.setPaintProperty(id,'line-color',C.road);
+      }else if(t==='symbol'){
+        map.setPaintProperty(id,'text-color',C.label); map.setPaintProperty(id,'text-halo-color',C.bg);
+      }
+    }catch(e){}
+  }
+}
+
+function pinEl(color,label){const d=document.createElement('div');d.className='mk';
+ d.innerHTML=`<svg viewBox="0 0 40 46"><path d="M20 44 C12 33 5 27 5 18 a15 15 0 0 1 30 0 c0 9 -7 15 -15 26z" fill="${color}" stroke="#3E2D24" stroke-width="2.5"/><circle cx="20" cy="18" r="9" fill="#FFFDF9" stroke="#3E2D24" stroke-width="2"/><circle cx="17" cy="17" r="1.6" fill="#3E2D24"/><circle cx="23" cy="17" r="1.6" fill="#3E2D24"/><path d="M17.5 21 q2.5 2.2 5 0" fill="none" stroke="#3E2D24" stroke-width="1.6" stroke-linecap="round"/></svg><b>${label}</b>`;return d;}
+const ME=[121.5850,24.9958], OT=[121.5818,24.9932];
+function build(mine){
+  if(map) map.remove();
+  map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/positron',center:[121.5835,24.9946],zoom:16.3,attributionControl:{compact:true},dragRotate:false});
+  map.on('load',()=>{
+    if(mine) restyle();
+    map.addSource('trail',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:[[121.5800,24.9925],[121.5808,24.9928],[121.5813,24.9930],OT]}}});
+    map.addLayer({id:'trail',type:'line',source:'trail',paint:{'line-color':'#86683A','line-width':3,'line-dasharray':[1.2,1.6]}});
+    new maplibregl.Marker({element:pinEl('#3E2D24','我'),anchor:'bottom'}).setLngLat(ME).addTo(map);
+    new maplibregl.Marker({element:pinEl('#B08D57','爸媽'),anchor:'bottom'}).setLngLat(OT).addTo(map);
+  });
+}
+build(true);
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));build(b.dataset.s==='mine');});
+</script></body></html>
